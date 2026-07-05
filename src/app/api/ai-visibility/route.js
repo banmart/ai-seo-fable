@@ -40,7 +40,7 @@ async function fetchText(url, timeoutMs = 8000) {
   const res = await fetch(url, {
     signal: AbortSignal.timeout(timeoutMs),
     redirect: 'follow',
-    headers: { 'User-Agent': 'GobiyaAIVisibilityChecker/1.0 (+https://gobiya.agency/tools/ai-visibility-checker)' },
+    headers: { 'User-Agent': 'GobiyaAIVisibilityChecker/1.0 (+https://www.gobiya.com/tools/ai-visibility-checker)' },
   });
   return { ok: res.ok, status: res.status, text: res.ok ? await res.text() : '' };
 }

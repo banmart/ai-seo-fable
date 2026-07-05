@@ -34,11 +34,11 @@ export default function AIVisibilityCheckerPage() {
       {
         '@type': 'WebApplication',
         name: 'AI Visibility Checker',
-        url: 'https://gobiya.agency/tools/ai-visibility-checker',
+        url: 'https://www.gobiya.com/tools/ai-visibility-checker',
         applicationCategory: 'SEOApplication',
         operatingSystem: 'Web',
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-        provider: { '@id': 'https://gobiya.agency/#org' },
+        provider: { '@id': 'https://www.gobiya.com/#org' },
       },
       {
         '@type': 'FAQPage',

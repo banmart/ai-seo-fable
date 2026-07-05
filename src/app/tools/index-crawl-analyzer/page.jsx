@@ -34,11 +34,11 @@ export default function IndexCrawlAnalyzerPage() {
       {
         '@type': 'WebApplication',
         name: 'Index & Crawl Analyzer',
-        url: 'https://gobiya.agency/tools/index-crawl-analyzer',
+        url: 'https://www.gobiya.com/tools/index-crawl-analyzer',
         applicationCategory: 'SEOApplication',
         operatingSystem: 'Web',
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-        provider: { '@id': 'https://gobiya.agency/#org' },
+        provider: { '@id': 'https://www.gobiya.com/#org' },
       },
       {
         '@type': 'FAQPage',

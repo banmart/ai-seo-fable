@@ -34,11 +34,11 @@ export default function SchemaValidatorPage() {
       {
         '@type': 'WebApplication',
         name: 'Schema & Rich Results Validator',
-        url: 'https://gobiya.agency/tools/schema-validator',
+        url: 'https://www.gobiya.com/tools/schema-validator',
         applicationCategory: 'SEOApplication',
         operatingSystem: 'Web',
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-        provider: { '@id': 'https://gobiya.agency/#org' },
+        provider: { '@id': 'https://www.gobiya.com/#org' },
       },
       {
         '@type': 'FAQPage',

@@ -34,11 +34,11 @@ export default function WebsiteHealthScanPage() {
       {
         '@type': 'WebApplication',
         name: 'Website Health Scan',
-        url: 'https://gobiya.agency/tools/website-health-scan',
+        url: 'https://www.gobiya.com/tools/website-health-scan',
         applicationCategory: 'SEOApplication',
         operatingSystem: 'Web',
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-        provider: { '@id': 'https://gobiya.agency/#org' },
+        provider: { '@id': 'https://www.gobiya.com/#org' },
       },
       {
         '@type': 'FAQPage',

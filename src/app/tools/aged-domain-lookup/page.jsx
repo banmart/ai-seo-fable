@@ -34,11 +34,11 @@ export default function AgedDomainLookupPage() {
       {
         '@type': 'WebApplication',
         name: 'Aged Domain Lookup',
-        url: 'https://gobiya.agency/tools/aged-domain-lookup',
+        url: 'https://www.gobiya.com/tools/aged-domain-lookup',
         applicationCategory: 'SEOApplication',
         operatingSystem: 'Web',
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-        provider: { '@id': 'https://gobiya.agency/#org' },
+        provider: { '@id': 'https://www.gobiya.com/#org' },
       },
       {
         '@type': 'FAQPage',

@@ -50,7 +50,7 @@ export function normalizeTarget(raw) {
   return { url: u.href, host, origin: u.origin };
 }
 
-const UA = 'GobiyaSiteDiagnostics/1.0 (+https://gobiya.agency/tools)';
+const UA = 'GobiyaSiteDiagnostics/1.0 (+https://www.gobiya.com/tools)';
 
 export async function fetchText(url, timeoutMs = 10000) {
   const res = await fetch(url, {

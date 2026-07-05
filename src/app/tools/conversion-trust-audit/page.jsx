@@ -34,11 +34,11 @@ export default function ConversionTrustAuditPage() {
       {
         '@type': 'WebApplication',
         name: 'Conversion & Trust Audit',
-        url: 'https://gobiya.agency/tools/conversion-trust-audit',
+        url: 'https://www.gobiya.com/tools/conversion-trust-audit',
         applicationCategory: 'SEOApplication',
         operatingSystem: 'Web',
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-        provider: { '@id': 'https://gobiya.agency/#org' },
+        provider: { '@id': 'https://www.gobiya.com/#org' },
       },
       {
         '@type': 'FAQPage',

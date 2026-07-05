@@ -26,7 +26,7 @@ function rateLimited(ip) {
 async function fetchJson(url, timeoutMs = 8000) {
   const res = await fetch(url, {
     signal: AbortSignal.timeout(timeoutMs),
-    headers: { 'User-Agent': 'GobiyaAgedDomainLookup/1.0 (+https://gobiya.agency/tools/aged-domain-lookup)' },
+    headers: { 'User-Agent': 'GobiyaAgedDomainLookup/1.0 (+https://www.gobiya.com/tools/aged-domain-lookup)' },
   });
   if (!res.ok) throw new Error(`${res.status}`);
   return res.json();

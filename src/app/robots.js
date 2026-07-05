@@ -7,6 +7,6 @@ export default function robots() {
       { userAgent: 'PerplexityBot', allow: ['/llms.txt', '/.well-known/'] },
       { userAgent: 'anthropic-ai', allow: ['/llms.txt', '/.well-known/'] },
     ],
-    sitemap: 'https://gobiya.agency/sitemap.xml',
+    sitemap: 'https://www.gobiya.com/sitemap.xml',
   };
 }

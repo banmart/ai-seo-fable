@@ -8,8 +8,19 @@ export const metadata = {
 };
 
 export default function SemanticSearchPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.gobiya.com/outcomes/semantic-search-domination/#page",
+    "url": "https://www.gobiya.com/outcomes/semantic-search-domination",
+    "name": "Semantic Search Domination — Own the Topic, Not the Keyword | GOBIYA",
+    "description": "The outcome: your site is the entity search systems resolve to for an entire topic cluster. Hub-and-spoke architecture, intent-mapped coverage, and rankings that scale.",
+    "isPartOf": { "@id": "https://www.gobiya.com/#website" }
+  };
+
   return (
     <SubpageLayout>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <p className="kicker mono">// OUTCOME 04 — TOPICAL STATE: SATURATED</p>
       <h1>Own the Topic.<br />Keywords Follow.</h1>
       <p className="lede">

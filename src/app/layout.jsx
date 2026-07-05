@@ -57,31 +57,6 @@ export default function RootLayout({ children }) {
         "url": "https://www.gobiya.com/",
         "name": "GOBIYA",
         "publisher": { "@id": "https://www.gobiya.com/#org" }
-      },
-      {
-        "@type": "WebPage",
-        "@id": "https://www.gobiya.com/#page",
-        "url": "https://www.gobiya.com/",
-        "name": "GOBIYA — AI SEO & Programmatic Search Architecture",
-        "isPartOf": { "@id": "https://www.gobiya.com/#website" },
-        "about": { "@id": "https://www.gobiya.com/#org" },
-        "primaryImageOfPage": "https://www.gobiya.com/assets/images/hero-core.png"
-      },
-      {
-        "@type": "Service",
-        "serviceType": "AI SEO & Programmatic Search Architecture",
-        "provider": { "@id": "https://www.gobiya.com/#org" },
-        "areaServed": "Worldwide",
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Core Services",
-          "itemListElement": [
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Entity-first Indexing Architecture" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Neuromarketing Layout Design" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Programmatic Landing Page Systems" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Conversion Funnel Engineering" } }
-          ]
-        }
       }
     ]
   };

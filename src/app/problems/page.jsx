@@ -41,8 +41,19 @@ const problems = [
 ];
 
 export default function ProblemsPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.gobiya.com/problems/#page",
+    "url": "https://www.gobiya.com/problems",
+    "name": "What's Breaking Your Search Revenue — Diagnosis Index | GOBIYA",
+    "description": "Invisible to AI assistants, penalty crashes, traffic without leads, unindexed pages, AI Overviews eating your clicks — find your symptom and its resolution path.",
+    "isPartOf": { "@id": "https://www.gobiya.com/#website" }
+  };
+
   return (
     <SubpageLayout>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <p className="kicker mono">// PROBLEMS — FAULT REGISTRY</p>
       <h1>What's Breaking Your Search Revenue</h1>
       <p className="lede">

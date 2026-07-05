@@ -8,8 +8,19 @@ export const metadata = {
 };
 
 export default function RapidAuthorityPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.gobiya.com/outcomes/rapid-authority-acquisition/#page",
+    "url": "https://www.gobiya.com/outcomes/rapid-authority-acquisition",
+    "name": "Rapid Authority Acquisition — Skip Years of Domain Building | GOBIYA",
+    "description": "The outcome: launch with the trust signals of an established site. Vetted aged-domain acquisition, clean link inheritance, and entity continuity — without the spam baggage.",
+    "isPartOf": { "@id": "https://www.gobiya.com/#website" }
+  };
+
   return (
     <SubpageLayout>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <p className="kicker mono">// OUTCOME 03 — AUTHORITY STATE: ACQUIRED</p>
       <h1>Day One.<br />Year Five Authority.</h1>
       <p className="lede">

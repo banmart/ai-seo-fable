@@ -8,8 +8,19 @@ export const metadata = {
 };
 
 export default function CitedByAiPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.gobiya.com/outcomes/cited-by-ai/#page",
+    "url": "https://www.gobiya.com/outcomes/cited-by-ai",
+    "name": "Get Your Brand Cited by ChatGPT, Perplexity & AI Overviews | GOBIYA",
+    "description": "The outcome: when buyers ask AI assistants category questions, your brand is in the answer. Entity engineering, citable content architecture, and verified machine channels.",
+    "isPartOf": { "@id": "https://www.gobiya.com/#website" }
+  };
+
   return (
     <SubpageLayout>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <p className="kicker mono">// OUTCOME 01 — CITATION STATE: ACTIVE</p>
       <h1>In the Answer.<br />Not Under It.</h1>
       <p className="lede">

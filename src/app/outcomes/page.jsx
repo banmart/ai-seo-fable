@@ -35,8 +35,19 @@ const outcomes = [
 ];
 
 export default function OutcomesPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.gobiya.com/outcomes/#page",
+    "url": "https://www.gobiya.com/outcomes",
+    "name": "Outcomes We Engineer — AI Citations, Stability, Authority | GOBIYA",
+    "description": "What we make happen: brands cited by AI assistants, traffic that survives core updates, day-one domain authority, and topic-level search dominance.",
+    "isPartOf": { "@id": "https://www.gobiya.com/#website" }
+  };
+
   return (
     <SubpageLayout>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <p className="kicker mono">// OUTCOMES — DELIVERY MANIFEST</p>
       <h1>What We Make Happen</h1>
       <p className="lede">

@@ -8,8 +8,19 @@ export const metadata = {
 };
 
 export default function AlgorithmProofPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.gobiya.com/outcomes/algorithm-proof/#page",
+    "url": "https://www.gobiya.com/outcomes/algorithm-proof",
+    "name": "Algorithm-Proof Growth — Survive Every Core Update | GOBIYA",
+    "description": "The outcome: organic growth that core updates strengthen instead of punish. Structural quality signals, clean link inheritance, and update-resilient architecture.",
+    "isPartOf": { "@id": "https://www.gobiya.com/#website" }
+  };
+
   return (
     <SubpageLayout>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <p className="kicker mono">// OUTCOME 02 — STABILITY STATE: HARDENED</p>
       <h1>Updates Ship.<br />Your Traffic Doesn't Flinch.</h1>
       <p className="lede">

@@ -67,8 +67,19 @@ const tools = [
 ];
 
 export default function ToolsPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.gobiya.com/tools/#page",
+    "url": "https://www.gobiya.com/tools",
+    "name": "Free SEO & AI Search Tools | GOBIYA",
+    "description": "Free diagnostic tools from GOBIYA: aged domain lookup, AI visibility checks, and more. No signup, no gate.",
+    "isPartOf": { "@id": "https://www.gobiya.com/#website" }
+  };
+
   return (
     <SubpageLayout>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <p className="kicker mono">// TOOLBAY — DIAGNOSTIC SYSTEMS: ONLINE</p>
       <h1>Free Diagnostic Tools</h1>
       <p className="lede">

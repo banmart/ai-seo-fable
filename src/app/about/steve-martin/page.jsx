@@ -46,9 +46,14 @@ export default function SteveMartinPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <p className="kicker mono">// GOBIYA / LEADERSHIP & ENGINEERING</p>
-      <h1>Steve Martin</h1>
-      <p className="lede">Founder, Lead Developer & Marketer at Gobiya</p>
+      <div className="steve-header-area">
+        <div className="steve-header-text">
+          <p className="kicker mono">// GOBIYA / LEADERSHIP & ENGINEERING</p>
+          <h1>Steve Martin</h1>
+          <p className="lede">Founder, Lead Developer & Marketer at Gobiya</p>
+        </div>
+        <img src="/assets/images/steve-portrait-thumb.webp" alt="Steve Martin" className="steve-profile-img" />
+      </div>
       
       <p className="steve-intro">
         Steve Martin founded Gobiya in 2010 and incorporated it as Gobiya LLC in 2012. 

@@ -300,7 +300,7 @@ h3 {
 .deploy-form label { font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.25em; margin-top: 1rem; }
 .deploy-form input {
   background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.4);
   color: var(--text);
   font-family: var(--mono);
   font-size: 0.9rem;
@@ -390,7 +390,7 @@ h3 {
 .tool-form input {
   flex: 1 1 16rem;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   color: var(--text);
   font-family: var(--mono);
   font-size: 0.9rem;

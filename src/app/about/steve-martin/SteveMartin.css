@@ -1,3 +1,33 @@
+.steve-header-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.steve-header-text {
+  flex: 1;
+}
+
+.steve-header-text h1 {
+  margin: 0.5rem 0;
+}
+
+.steve-header-text .kicker,
+.steve-header-text .lede {
+  margin: 0;
+}
+
+.steve-profile-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--cyan, #00f0ff);
+  flex-shrink: 0;
+}
+
 .steve-intro {
   font-size: 1.1rem;
   color: var(--text-dim);

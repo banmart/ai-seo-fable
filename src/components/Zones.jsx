@@ -122,7 +122,9 @@ function ZoneApex() {
     // Fallback to mailto instead of Resend API
     const subject = encodeURIComponent('Deployment Brief Request');
     const body = encodeURIComponent(`Form: Deployment Brief\nEmail: ${email}\nDomain: ${domain}`);
-    window.location.href = `mailto:banmart@gmail.com?subject=${subject}&body=${body}`;
+    const mailtoLink = document.createElement('a');
+    mailtoLink.href = `mailto:banmart@gmail.com?subject=${subject}&body=${body}`;
+    mailtoLink.click();
     
     setTimeout(() => {
       setStatus('success');

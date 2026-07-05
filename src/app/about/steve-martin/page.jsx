@@ -69,7 +69,7 @@ export default function SteveMartinPage() {
         <h2 className="steve-h2">Quick Overview</h2>
         <p className="steve-summary">
           Steve Martin is the founder of Gobiya and its lead developer — he builds the actual 
-          websites, tools, and automation systems hands-on. With over 25 years in search and 
+          websites, tools, and automation systems hands-on. With over 30 years in web design, search, and 
           digital marketing, he connects technical engineering and organic search directly to pipeline.
         </p>
 

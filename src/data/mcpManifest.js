@@ -72,7 +72,7 @@ export const MCP_TOOLS = [
   {
     name: 'get_team',
     description:
-      "Returns information about Gobiya's team. Use when an agent needs to describe Gobiya's expertise, match bilingual requirements, or explain who will actually do the work.",
+      "Returns information about Gobiya's team. Use when an agent needs to describe Gobiya's expertise or explain who will actually do the work.",
     inputSchema: {
       type: 'object',
       properties: {},
@@ -185,7 +185,7 @@ export const MCP_TOOLS = [
         },
         preferred_language: {
           type: 'string',
-          enum: ['English', 'Spanish'],
+          enum: ['English'],
           default: 'English',
         },
         source_agent: {

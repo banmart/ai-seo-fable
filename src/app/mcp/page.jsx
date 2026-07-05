@@ -233,7 +233,7 @@ export default function MCPPage() {
           <p itemProp="description">
             Gobiya is a Los Angeles digital marketing agency specializing in SEO, GEO (AI citation optimization),
             Google Ads, custom web development, and Google penalty recovery for local service businesses and B2B firms.
-            Founded by Steve Martin in 2010 — 25 years in search engineering. Bilingual English/Spanish.
+            Founded by Steve Martin in 2010 — 25 years in search engineering.
           </p>
           <div className="mcp-about-links">
             <a href="https://www.gobiya.com/contact" className="cta">Book a Free Strategy Call →</a>

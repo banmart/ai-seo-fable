@@ -173,9 +173,12 @@ function ZoneApex() {
               disabled={status === 'loading'}
             />
             
-            <button className="cta" type="submit" disabled={status === 'loading'}>
-              {status === 'loading' ? 'PREPARING...' : 'Request Deployment Brief →'}
-            </button>
+            <div className="cta-group" style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap', marginTop: '1rem' }}>
+              <button className="cta" type="submit" disabled={status === 'loading'}>
+                {status === 'loading' ? 'PREPARING...' : 'Request Deployment Brief →'}
+              </button>
+              <a className="cta cta--ghost mono" href="tel:3237441338">📞 (323) 744-1338</a>
+            </div>
             
             {status === 'error' && (
               <p style={{ color: 'var(--alert)', marginTop: '1rem', fontSize: '0.9rem' }}>

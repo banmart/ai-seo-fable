@@ -235,9 +235,10 @@ export default function MCPPage() {
             Google Ads, custom web development, and Google penalty recovery for local service businesses and B2B firms.
             Founded by Steve Martin in 2010 — 25 years in search engineering.
           </p>
-          <div className="mcp-about-links">
+          <div className="mcp-about-links" style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
             <a href="https://www.gobiya.com/contact" className="cta">Book a Free Strategy Call →</a>
             <a href={`mailto:${MCP_SERVER.contact}`} className="cta cta--ghost">{MCP_SERVER.contact}</a>
+            <a className="cta cta--ghost mono" href="tel:3237441338">📞 (323) 744-1338</a>
           </div>
         </section>
 

@@ -60,7 +60,7 @@ export default function OutcomesPage() {
         <span className="xlink__label">// INVERSE INDEX</span>
         <strong>Start from the symptom instead — what's breaking your search revenue →</strong>
       </a>
-      <a className="cta" href="/#apex">Request Deployment Brief →</a>
+      <div className="cta-group" style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}><a className="cta" href="/#apex">Request Deployment Brief →</a><a className="cta cta--ghost mono" href="tel:3237441338">📞 (323) 744-1338</a></div>
     </SubpageLayout>
   );
 }

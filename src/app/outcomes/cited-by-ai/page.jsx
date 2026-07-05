@@ -81,7 +81,7 @@ export default function CitedByAiPage() {
         </a>
       </section>
 
-      <a className="cta" href="/#apex">Request Deployment Brief →</a>
+      <div className="cta-group" style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}><a className="cta" href="/#apex">Request Deployment Brief →</a><a className="cta cta--ghost mono" href="tel:3237441338">📞 (323) 744-1338</a></div>
     </SubpageLayout>
   );
 }

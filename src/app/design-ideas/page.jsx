@@ -49,12 +49,10 @@ export default function DesignIdeasPage() {
 
     setState('LOADING');
     
-    // Fire and forget the contact API request
-    fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, domain, formType: 'Design Ideas' }),
-    }).catch(console.error);
+    // Fallback to mailto instead of Resend API
+    const subject = encodeURIComponent('Design Ideas Request');
+    const body = encodeURIComponent(`Form: Design Ideas\nEmail: ${email}\nDomain: ${domain}`);
+    window.location.href = `mailto:banmart@gmail.com?subject=${subject}&body=${body}`;
 
     // Simulate multi-step AI generation
     let step = 0;

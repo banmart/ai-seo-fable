@@ -119,23 +119,16 @@ function ZoneApex() {
     e.preventDefault();
     setStatus('loading');
     
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, domain, formType: 'Deployment Brief' }),
-      });
-      
-      if (res.ok) {
-        setStatus('success');
-        setEmail('');
-        setDomain('');
-      } else {
-        setStatus('error');
-      }
-    } catch (err) {
-      setStatus('error');
-    }
+    // Fallback to mailto instead of Resend API
+    const subject = encodeURIComponent('Deployment Brief Request');
+    const body = encodeURIComponent(`Form: Deployment Brief\nEmail: ${email}\nDomain: ${domain}`);
+    window.location.href = `mailto:banmart@gmail.com?subject=${subject}&body=${body}`;
+    
+    setTimeout(() => {
+      setStatus('success');
+      setEmail('');
+      setDomain('');
+    }, 1000);
   };
 
   return (
@@ -150,8 +143,8 @@ function ZoneApex() {
         
         {status === 'success' ? (
           <div className="deploy-form" style={{ textAlign: 'center', padding: '3rem 0' }}>
-            <h3 style={{ color: 'var(--cyan)' }}>// TRANSMISSION RECEIVED</h3>
-            <p>Our engineering team will review your domain and be in touch shortly.</p>
+            <h3 style={{ color: 'var(--cyan)' }}>// TRANSMISSION PREPARED</h3>
+            <p>Your email client should have opened to complete the request.</p>
           </div>
         ) : (
           <form className="deploy-form" onSubmit={handleSubmit} aria-label="Discovery inquiry">
@@ -181,7 +174,7 @@ function ZoneApex() {
             />
             
             <button className="cta" type="submit" disabled={status === 'loading'}>
-              {status === 'loading' ? 'TRANSMITTING...' : 'Request Deployment Brief →'}
+              {status === 'loading' ? 'PREPARING...' : 'Request Deployment Brief →'}
             </button>
             
             {status === 'error' && (

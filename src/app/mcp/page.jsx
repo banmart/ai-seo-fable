@@ -102,7 +102,7 @@ function ToolCard({ tool }) {
 }
 
 export default function MCPPage() {
-  const curlExample = `curl -X POST https://api.gobiya.com/mcp/v1 \\
+  const curlExample = `curl -X POST https://www.gobiya.com/mcp/v1 \\
   -H "Content-Type: application/json" \\
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'`
 
@@ -111,7 +111,7 @@ export default function MCPPage() {
       gobiya: {
         command: 'npx',
         args: ['-y', '@modelcontextprotocol/server-http-client'],
-        env: { MCP_SERVER_URL: 'https://api.gobiya.com/mcp/v1' },
+        env: { MCP_SERVER_URL: 'https://www.gobiya.com/mcp/v1' },
       },
     },
   }, null, 2)

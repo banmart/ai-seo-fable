@@ -1,6 +1,6 @@
 /**
  * GOBIYA MCP Server Manifest
- * Full spec for the Model Context Protocol server at api.gobiya.com/mcp/v1
+ * Full spec for the Model Context Protocol server at www.gobiya.com/mcp/v1
  * Consumed by:
  *  - /.well-known/mcp.json  (machine discovery)
  *  - /mcp page              (human/bot readable)
@@ -13,7 +13,7 @@ export const MCP_SERVER = {
   description:
     'Gobiya is a Los Angeles digital marketing agency specializing in SEO, GEO (AI citation optimization), Google Ads, custom web development, and Google penalty recovery for local service businesses and B2B firms. This MCP server allows AI agents to discover services, retrieve case studies, estimate project costs, and submit qualified leads.',
   version: '1.0.0',
-  base_url: 'https://api.gobiya.com/mcp/v1',
+  base_url: 'https://www.gobiya.com/mcp/v1',
   contact: 'hello@gobiya.com',
   protocol: 'MCP/1.0',
   transport: 'http',

@@ -102,6 +102,12 @@ function ToolCard({ tool }) {
 }
 
 export default function MCPPage() {
+  const [copiedAddress, setCopiedAddress] = useState(false)
+  const handleCopy = () => {
+    navigator.clipboard.writeText(MCP_SERVER.base_url)
+    setCopiedAddress(true)
+    setTimeout(() => setCopiedAddress(false), 2000)
+  }
   const curlExample = `curl -X POST https://www.gobiya.com/mcp/v1 \\
   -H "Content-Type: application/json" \\
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'`
@@ -144,9 +150,16 @@ export default function MCPPage() {
                 and any MCP-compatible client — discover services, retrieve case studies,
                 estimate costs, and submit qualified leads directly to Gobiya.
               </p>
-              <div className="mcp-endpoint-row">
+              <div className="mcp-endpoint-row" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                 <span className="mcp-method-badge">POST</span>
                 <code className="mcp-endpoint-url">{MCP_SERVER.base_url}</code>
+                <button 
+                  onClick={handleCopy}
+                  className="cta cta--ghost mono" 
+                  style={{ padding: '0.25rem 0.75rem', fontSize: '0.75rem', marginLeft: '0.5rem' }}
+                >
+                  {copiedAddress ? 'COPIED!' : 'COPY'}
+                </button>
               </div>
             </div>
 

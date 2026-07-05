@@ -106,7 +106,7 @@ const TEAM = [
     title: 'Founder, Lead Developer & Marketer',
     url: 'https://www.gobiya.com/about/steve-martin',
     years_experience: 25,
-    languages: ['English', 'Spanish'],
+    languages: ['English'],
     specialties: [
       'Entity SEO', 'GEO', 'Schema Markup', 'Google Penalty Recovery',
       'React/Vite', 'Supabase', 'AI & LLM Systems', 'B2B Pipeline Attribution',
@@ -244,7 +244,7 @@ export function callTool(name, args = {}) {
         call_type: 'Free strategy call',
         host: 'Steve Martin, Founder at Gobiya',
         available_slots: [],
-        note: 'Consultations are conducted via Zoom or phone. Steve is bilingual in English and Spanish.',
+        note: 'Consultations are conducted via Zoom or phone.',
       }
 
     default:

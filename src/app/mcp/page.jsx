@@ -3,6 +3,7 @@
 /* ============ GOBIYA — /mcp Discovery Page ============ */
 import { useState } from 'react'
 import { MCP_SERVER, MCP_TOOLS } from '../../data/mcpManifest'
+import SubpageLayout from '../../components/SubpageLayout'
 import './MCPPage.css'
 
 const PILLAR_COLORS = {
@@ -123,19 +124,9 @@ export default function MCPPage() {
   }, null, 2)
 
   return (
-    <div className="mcp-page" itemScope itemType="https://schema.org/WebPage">
-      {/* ── Header ── */}
-      <header className="mcp-site-header">
-        <a className="brand" href="/">GOBIYA<span className="brand__tick">_</span></a>
-        <nav className="mcp-header-nav">
-          <a href="/" className="mcp-nav-link">← Home</a>
-          <a href="/.well-known/mcp.json" className="header-cta" target="_blank" rel="noopener">
-            RAW JSON
-          </a>
-        </nav>
-      </header>
-
-      <main className="mcp-main">
+    <SubpageLayout>
+      <div className="mcp-page" itemScope itemType="https://schema.org/WebPage" style={{ background: 'transparent' }}>
+        <main className="mcp-main" style={{ paddingTop: '2rem' }}>
 
         {/* ── Hero ── */}
         <section className="mcp-hero" aria-labelledby="mcp-h1">
@@ -255,18 +246,8 @@ export default function MCPPage() {
           </div>
         </section>
 
-      </main>
-
-      <footer className="site-footer">
-        <p className="mono">
-          GOBIYA — MCP SERVER v{MCP_SERVER.version}. © 2026.{' '}
-          <a href={`mailto:${MCP_SERVER.contact}`}>{MCP_SERVER.contact}</a>
-          {' · '}
-          <a href="/.well-known/mcp.json">mcp.json</a>
-          {' · '}
-          <a href="/llms.txt">llms.txt</a>
-        </p>
-      </footer>
-    </div>
+        </main>
+      </div>
+    </SubpageLayout>
   )
 }

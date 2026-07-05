@@ -3,14 +3,14 @@ import '../index.css';
 export const metadata = {
   title: 'GOBIYA — AI SEO & Programmatic Search Architecture',
   description: 'Elite AI SEO and web development agency architecting programmatic search ecosystems and behavioral-psychology-driven conversion funnels.',
-  metadataBase: new URL('https://gobiya.agency/'),
+  metadataBase: new URL('https://www.gobiya.com/'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'GOBIYA — Command the Algorithm',
     description: 'Elite AI SEO & Web Development. Programmatic search ecosystems. Behavioral conversion architecture.',
-    url: 'https://gobiya.agency/',
+    url: 'https://www.gobiya.com/',
     siteName: 'GOBIYA',
     images: [
       {
@@ -33,38 +33,38 @@ export default function RootLayout({ children }) {
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://gobiya.agency/#org",
+        "@id": "https://www.gobiya.com/#org",
         "name": "GOBIYA",
-        "url": "https://gobiya.agency/",
-        "logo": "https://gobiya.agency/assets/images/hero-core.png",
+        "url": "https://www.gobiya.com/",
+        "logo": "https://www.gobiya.com/assets/images/hero-core.png",
         "description": "Elite AI SEO and web development agency architecting programmatic search ecosystems and behavioral-psychology-driven conversion funnels.",
         "knowsAbout": ["Search Engine Optimization","Programmatic SEO","Entity-first Indexing","Conversion Rate Optimization","Neuromarketing","Core Web Vitals"],
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "sales",
-          "email": "deploy@gobiya.agency"
+          "email": "deploy@www.gobiya.com"
         }
       },
       {
         "@type": "WebSite",
-        "@id": "https://gobiya.agency/#website",
-        "url": "https://gobiya.agency/",
+        "@id": "https://www.gobiya.com/#website",
+        "url": "https://www.gobiya.com/",
         "name": "GOBIYA",
-        "publisher": { "@id": "https://gobiya.agency/#org" }
+        "publisher": { "@id": "https://www.gobiya.com/#org" }
       },
       {
         "@type": "WebPage",
-        "@id": "https://gobiya.agency/#page",
-        "url": "https://gobiya.agency/",
+        "@id": "https://www.gobiya.com/#page",
+        "url": "https://www.gobiya.com/",
         "name": "GOBIYA — AI SEO & Programmatic Search Architecture",
-        "isPartOf": { "@id": "https://gobiya.agency/#website" },
-        "about": { "@id": "https://gobiya.agency/#org" },
-        "primaryImageOfPage": "https://gobiya.agency/assets/images/hero-core.png"
+        "isPartOf": { "@id": "https://www.gobiya.com/#website" },
+        "about": { "@id": "https://www.gobiya.com/#org" },
+        "primaryImageOfPage": "https://www.gobiya.com/assets/images/hero-core.png"
       },
       {
         "@type": "Service",
         "serviceType": "AI SEO & Programmatic Search Architecture",
-        "provider": { "@id": "https://gobiya.agency/#org" },
+        "provider": { "@id": "https://www.gobiya.com/#org" },
         "areaServed": "Worldwide",
         "hasOfferCatalog": {
           "@type": "OfferCatalog",

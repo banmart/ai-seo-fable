@@ -49,6 +49,13 @@ export default function DesignIdeasPage() {
 
     setState('LOADING');
     
+    // Fire and forget the contact API request
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, domain, formType: 'Design Ideas' }),
+    }).catch(console.error);
+
     // Simulate multi-step AI generation
     let step = 0;
     const interval = setInterval(() => {

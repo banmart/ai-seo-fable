@@ -1,4 +1,4 @@
-const BASE = 'https://gobiya.agency';
+const BASE = 'https://www.gobiya.com';
 
 export default function sitemap() {
   const routes = [

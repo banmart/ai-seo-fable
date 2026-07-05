@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 /* Zones — five scroll-scrub sections */
 
 function ZoneChaos() {
@@ -109,6 +111,33 @@ function ZoneScale() {
 }
 
 function ZoneApex() {
+  const [email, setEmail] = useState('');
+  const [domain, setDomain] = useState('');
+  const [status, setStatus] = useState('idle'); // idle | loading | success | error
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('loading');
+    
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, domain, formType: 'Deployment Brief' }),
+      });
+      
+      if (res.ok) {
+        setStatus('success');
+        setEmail('');
+        setDomain('');
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      setStatus('error');
+    }
+  };
+
   return (
     <section id="apex" className="zone zone--apex" data-zone="5" aria-labelledby="h-apex">
       <div className="zone__pin">
@@ -118,13 +147,51 @@ function ZoneApex() {
           Engagements are limited. We deploy for organizations where search is a revenue system,
           not a marketing line item.
         </p>
-        <form className="deploy-form" action="#" method="post" aria-label="Discovery inquiry">
-          <label className="mono" htmlFor="f-email">WORK EMAIL</label>
-          <input id="f-email" name="email" type="email" required autoComplete="email" placeholder="you@company.com" />
-          <label className="mono" htmlFor="f-domain">PRIMARY DOMAIN</label>
-          <input id="f-domain" name="domain" type="url" required placeholder="https://" />
-          <button className="cta" type="submit">Request Deployment Brief →</button>
-        </form>
+        
+        {status === 'success' ? (
+          <div className="deploy-form" style={{ textAlign: 'center', padding: '3rem 0' }}>
+            <h3 style={{ color: 'var(--cyan)' }}>// TRANSMISSION RECEIVED</h3>
+            <p>Our engineering team will review your domain and be in touch shortly.</p>
+          </div>
+        ) : (
+          <form className="deploy-form" onSubmit={handleSubmit} aria-label="Discovery inquiry">
+            <label className="mono" htmlFor="f-email">WORK EMAIL</label>
+            <input 
+              id="f-email" 
+              name="email" 
+              type="email" 
+              required 
+              autoComplete="email" 
+              placeholder="you@company.com" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={status === 'loading'}
+            />
+            
+            <label className="mono" htmlFor="f-domain">PRIMARY DOMAIN</label>
+            <input 
+              id="f-domain" 
+              name="domain" 
+              type="url" 
+              required 
+              placeholder="https://" 
+              value={domain}
+              onChange={(e) => setDomain(e.target.value)}
+              disabled={status === 'loading'}
+            />
+            
+            <button className="cta" type="submit" disabled={status === 'loading'}>
+              {status === 'loading' ? 'TRANSMITTING...' : 'Request Deployment Brief →'}
+            </button>
+            
+            {status === 'error' && (
+              <p style={{ color: 'var(--alert)', marginTop: '1rem', fontSize: '0.9rem' }}>
+                Transmission failed. Please try again or email us directly.
+              </p>
+            )}
+          </form>
+        )}
+        
         <div style={{ marginTop: '3rem', display: 'flex', justifyContent: 'flex-start' }}>
           <a className="cta cta--ghost" href="/about/steve-martin" style={{ textDecoration: 'none' }}>
             Learn about Steve Martin →

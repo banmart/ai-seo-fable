@@ -1,0 +1,96 @@
+.steve-intro {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  line-height: 1.75;
+  max-width: 720px;
+  margin-bottom: 3rem;
+}
+
+.steve-section {
+  margin-bottom: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.steve-h2 {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+}
+
+.steve-summary {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text);
+  max-width: 780px;
+  margin-bottom: 2.5rem;
+}
+
+.steve-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.steve-card {
+  background: rgba(11, 15, 25, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  transition: border-color 0.3s ease;
+}
+
+.steve-card:hover {
+  border-color: var(--cyan);
+}
+
+.steve-card h3 {
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+.steve-card p {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.steve-card .spec-id {
+  color: var(--cyan);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+ul.faq {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 780px;
+}
+
+ul.faq li {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+ul.faq li:last-child {
+  border-bottom: none;
+}
+
+ul.faq h3 {
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+ul.faq p {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  line-height: 1.75;
+}

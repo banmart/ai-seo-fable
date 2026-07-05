@@ -1,0 +1,138 @@
+/* Zones — five scroll-scrub sections */
+
+function ZoneChaos() {
+  return (
+    <section id="chaos" className="zone" data-zone="1" aria-labelledby="h-chaos">
+      <div className="zone__pin">
+        <p className="kicker mono">// ZONE 01 — SURFACE STATE: UNSTRUCTURED</p>
+        <h1 id="h-chaos">
+          Stop Guessing.<br />Command the Algorithm.
+        </h1>
+        <p className="lede">
+          GOBIYA architects programmatic search ecosystems for high-growth enterprises.
+          Search is not a channel. It is infrastructure — and infrastructure is engineered, not guessed.
+        </p>
+        <a className="cta cta--ghost" href="#integration">Initiate Descent ↓</a>
+      </div>
+    </section>
+  );
+}
+
+function ZoneIntegration() {
+  return (
+    <section id="integration" className="zone" data-zone="2" aria-labelledby="h-integration">
+      <div className="zone__pin">
+        <p className="kicker mono">// ZONE 02 — SEMANTIC LAYER: ONLINE</p>
+        <h2 id="h-integration">Entity-First Indexing Architecture</h2>
+        <p className="lede">
+          Legacy keyword stuffing is dead weight. We model your domain as a machine-readable
+          entity graph — the structure crawlers and LLMs actually resolve.
+        </p>
+        <ul className="proof-grid">
+          <li>
+            <strong className="mono">100%</strong>
+            <span>schema coverage across every indexable node</span>
+          </li>
+          <li>
+            <strong className="mono">×3.7</strong>
+            <span>median entity-recognition lift post-deployment</span>
+          </li>
+          <li>
+            <strong className="mono">&lt;28d</strong>
+            <span>to full semantic-layer integration</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+function ZoneConversion() {
+  return (
+    <section id="conversion" className="zone" data-zone="3" aria-labelledby="h-conversion">
+      <div className="zone__pin">
+        <p className="kicker mono">// ZONE 03 — BEHAVIORAL ARCHITECTURE: MAPPED</p>
+        <h2 id="h-conversion">Traffic Is Input. Conversion Is Output.</h2>
+        <ul className="spec-list">
+          <li>
+            <span className="mono spec-id">S-01</span>
+            <h3>Neuromarketing Layout Design</h3>
+            <p>Visual hierarchies engineered against attention data — not aesthetic preference.</p>
+          </li>
+          <li>
+            <span className="mono spec-id">S-02</span>
+            <h3>Frictionless UI/UX Pathways</h3>
+            <p>Every interaction audited for cognitive load. Decision points reduced to intent.</p>
+          </li>
+          <li>
+            <span className="mono spec-id">S-03</span>
+            <h3>Programmatic Landing Page Scale</h3>
+            <p>Thousands of intent-matched pages generated, deduplicated, and quality-gated from one system.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+function ZoneScale() {
+  return (
+    <section id="scale" className="zone" data-zone="4" aria-labelledby="h-scale">
+      <div className="zone__pin">
+        <p className="kicker mono">// ZONE 04 — PIPELINE STATE: BRANCHING</p>
+        <h2 id="h-scale">Structural Growth. Measured.</h2>
+        <dl className="stat-grid">
+          <div>
+            <dt className="mono">ORGANIC TRAFFIC</dt>
+            <dd><span className="stat" data-count="412">0</span>%</dd>
+            <dd className="stat-note">median 12-month growth, B2B SaaS cohort</dd>
+          </div>
+          <div>
+            <dt className="mono">CONVERSION LIFT</dt>
+            <dd><span className="stat" data-count="188">0</span>%</dd>
+            <dd className="stat-note">post behavioral-architecture rebuild</dd>
+          </div>
+          <div>
+            <dt className="mono">ALGORITHMIC STABILITY</dt>
+            <dd><span className="stat" data-count="97">0</span>.4</dd>
+            <dd className="stat-note">core-update resilience index / 100</dd>
+          </div>
+          <div>
+            <dt className="mono">INDEXED PAGES</dt>
+            <dd><span className="stat" data-count="240">0</span>K</dd>
+            <dd className="stat-note">programmatic pages deployed &amp; ranking</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+  );
+}
+
+function ZoneApex() {
+  return (
+    <section id="apex" className="zone zone--apex" data-zone="5" aria-labelledby="h-apex">
+      <div className="zone__pin">
+        <p className="kicker mono">// ZONE 05 — REVENUE ENGINE: STABLE</p>
+        <h2 id="h-apex">Inquire for Core Architecture Deployment</h2>
+        <p className="lede">
+          Engagements are limited. We deploy for organizations where search is a revenue system,
+          not a marketing line item.
+        </p>
+        <form className="deploy-form" action="#" method="post" aria-label="Discovery inquiry">
+          <label className="mono" htmlFor="f-email">WORK EMAIL</label>
+          <input id="f-email" name="email" type="email" required autoComplete="email" placeholder="you@company.com" />
+          <label className="mono" htmlFor="f-domain">PRIMARY DOMAIN</label>
+          <input id="f-domain" name="domain" type="url" required placeholder="https://" />
+          <button className="cta" type="submit">Request Deployment Brief →</button>
+        </form>
+        <div style={{ marginTop: '3rem', display: 'flex', justifyContent: 'flex-start' }}>
+          <a className="cta cta--ghost" href="/about/steve-martin" style={{ textDecoration: 'none' }}>
+            Learn about Steve Martin →
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export { ZoneChaos, ZoneIntegration, ZoneConversion, ZoneScale, ZoneApex };

@@ -1,0 +1,408 @@
+/* ============ GOBIYA — /mcp Page Styles ============ */
+
+.mcp-page {
+  background: var(--navy);
+  color: var(--text);
+  font-family: var(--body);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Header ── */
+.mcp-site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2.5rem;
+  background: rgba(11, 15, 25, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+}
+
+.mcp-header-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.mcp-nav-link {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.mcp-nav-link:hover { color: var(--cyan); }
+
+/* ── Main layout ── */
+.mcp-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 4rem) 6rem;
+}
+
+/* ── Hero ── */
+.mcp-hero {
+  padding: 5rem 0 3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 4rem;
+}
+
+.mcp-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: start;
+}
+
+.mcp-hero h1 {
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.2rem;
+  line-height: 1.2;
+}
+
+.mcp-hero-sub {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-dim);
+  max-width: 38rem;
+  margin-bottom: 2rem;
+}
+
+.mcp-endpoint-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 240, 255, 0.18);
+  padding: 0.8rem 1.2rem;
+  width: fit-content;
+}
+
+.mcp-method-badge {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  color: var(--black);
+  background: var(--cyan);
+  padding: 0.2rem 0.55rem;
+  font-weight: 500;
+}
+
+.mcp-endpoint-url {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--cyan);
+  letter-spacing: 0.05em;
+}
+
+/* Stats panel */
+.mcp-stat-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.1);
+  height: fit-content;
+}
+
+.mcp-stat {
+  background: rgba(11, 15, 25, 0.95);
+  padding: 1.4rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.mcp-stat span:first-child {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  color: var(--cyan);
+}
+
+.mcp-stat span:last-child {
+  font-size: 0.7rem;
+  font-family: var(--mono);
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+/* ── Sections ── */
+.mcp-section {
+  margin-bottom: 5rem;
+}
+
+.mcp-section-title {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: var(--cyan);
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+/* ── Discovery cards ── */
+.mcp-discovery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.mcp-discovery-card {
+  background: rgba(11, 15, 25, 0.9);
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s;
+}
+
+a.mcp-discovery-card:hover { background: rgba(0, 240, 255, 0.05); }
+
+.mcp-discovery-icon { font-size: 1.4rem; }
+
+.mcp-discovery-card .mono {
+  font-size: 0.78rem;
+  color: var(--cyan);
+  word-break: break-all;
+}
+
+.mcp-discovery-desc {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+/* ── Connect ── */
+.mcp-connect-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.mcp-connect-sub {
+  font-family: var(--body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+}
+
+.mcp-code-block {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 240, 255, 0.12);
+  border-left: 3px solid var(--cyan);
+  padding: 1.2rem 1.4rem;
+  overflow-x: auto;
+  margin: 0;
+}
+
+.mcp-code-block code {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text);
+  line-height: 1.7;
+  white-space: pre;
+}
+
+/* ── Tools ── */
+.mcp-tools-intro {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+}
+
+.mcp-tools-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mcp-tool-card {
+  background: rgba(11, 15, 25, 0.95);
+}
+
+.mcp-tool-header {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 1.6rem 1.8rem;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  transition: background 0.15s;
+}
+
+.mcp-tool-header:hover { background: rgba(0, 240, 255, 0.04); }
+
+.mcp-tool-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.mcp-tool-name {
+  font-size: 0.95rem;
+  color: var(--cyan);
+  letter-spacing: 0.06em;
+}
+
+.mcp-tool-arrow {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+}
+
+.mcp-tool-desc {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  max-width: 70ch;
+  text-align: left;
+}
+
+.mcp-tool-body {
+  padding: 0 1.8rem 1.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mcp-schema-heading {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: var(--text-dim);
+  margin: 1.4rem 0 0.8rem;
+}
+
+.mcp-schema-wrap { overflow-x: auto; }
+
+.mcp-schema-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.mcp-schema-table th {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  text-align: left;
+  padding: 0.5rem 1rem 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-weight: 400;
+}
+
+.mcp-schema-table td {
+  padding: 0.65rem 1rem 0.65rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.mcp-schema-table tr:last-child td { border-bottom: none; }
+.mcp-schema-required td { background: rgba(0, 240, 255, 0.02); }
+
+.mcp-schema-name { color: var(--text); }
+
+.mcp-required-star {
+  color: var(--cyan);
+  margin-left: 0.2rem;
+  font-size: 0.9em;
+}
+
+.mcp-schema-desc { color: var(--text-dim); max-width: 40ch; }
+
+.mcp-type-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  border: 1px solid;
+  padding: 0.1rem 0.5rem;
+  border-radius: 0;
+  white-space: nowrap;
+}
+
+.mcp-no-params {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  padding: 1rem 0;
+  opacity: 0.7;
+}
+
+/* ── Methods ── */
+.mcp-methods-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mcp-method-row {
+  background: rgba(11, 15, 25, 0.95);
+  padding: 1.4rem 1.8rem;
+  display: grid;
+  grid-template-columns: 14rem 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.mcp-method-name {
+  font-size: 0.88rem;
+  color: var(--cyan);
+}
+
+.mcp-method-desc {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ── About ── */
+.mcp-about p {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-dim);
+  max-width: 52rem;
+  margin-bottom: 2rem;
+}
+
+.mcp-about-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .mcp-hero-grid { grid-template-columns: 1fr; }
+  .mcp-stat-panel { grid-template-columns: repeat(4, 1fr); }
+  .mcp-connect-grid { grid-template-columns: 1fr; }
+  .mcp-method-row { grid-template-columns: 1fr; gap: 0.4rem; }
+  .mcp-site-header { padding: 1rem 1.2rem; }
+}
+
+@media (max-width: 560px) {
+  .mcp-stat-panel { grid-template-columns: 1fr 1fr; }
+  .mcp-endpoint-row { flex-wrap: wrap; }
+}

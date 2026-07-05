@@ -25,6 +25,12 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
   },
+  verification: {
+    google: 'BCJ8-9rzY9X5CjZqM2hY7erF-1vFCZHFKl-Y-nbXv3U',
+    other: {
+      'p:domain_verify': '422d36275e412e182dff33f542a68498',
+    },
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -91,6 +97,37 @@ export default function RootLayout({ children }) {
         <link rel="describedby" href="/llms.txt" type="text/plain" />
         <meta name="mcp-server" content="https://api.gobiya.com/mcp/v1" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            function loadTrackingScripts() {
+              if (window.trackingLoaded) return;
+              window.trackingLoaded = true;
+              
+              // GA4 (Google Analytics)
+              const ga = document.createElement('script');
+              ga.src = "https://www.googletagmanager.com/gtag/js?id=G-3R3D5Q9YV6";
+              ga.async = true;
+              document.head.appendChild(ga);
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-3R3D5Q9YV6', { anonymize_ip: true, send_page_view: true });
+
+              // Microsoft Clarity
+              (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "v5j018vnnn");
+            }
+
+            // Load on interaction or after 3.5s
+            ['mousemove', 'scroll', 'touchstart', 'click'].forEach(e => 
+              window.addEventListener(e, loadTrackingScripts, { once: true })
+            );
+            setTimeout(loadTrackingScripts, 3500);
+          `
+        }} />
       </head>
       <body>
         {children}

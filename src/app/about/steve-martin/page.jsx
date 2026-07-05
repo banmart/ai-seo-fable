@@ -57,7 +57,7 @@ export default function SteveMartinPage() {
       
       <p className="steve-intro">
         Steve Martin founded Gobiya in 2010 and incorporated it as Gobiya LLC in 2012. 
-        He started his career in web technology in 1996 at AT&T WorldNet in Burbank, 
+        He started with Website Design in 1996 and began his career in web technology at AT&T WorldNet in Burbank, 
         then built a video content distribution platform for Sony Music artists at Webcastr.com 
         in West Hollywood from 2000 to 2005. He has worked in SEO since Google's early years 
         and was a certified Google Partner for Google Ads and Analytics from 2015 to 2019. 

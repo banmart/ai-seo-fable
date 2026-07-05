@@ -305,9 +305,9 @@ export function useScrollEngine() {
       resize();
       if (!reduceMotion) {
         requestAnimationFrame(loop);
-        (async () => {
-          for (let i = 0; i < ZONES.length; i++) await decodeClip(i);
-        })();
+        // Decode only the first clip (hero) immediately.
+        // The render loop handles lazy loading for the rest.
+        decodeClip(0);
       }
       initScrollTriggers();
     }

@@ -65,6 +65,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="preload" as="image" href="/assets/images/hero-core.webp" fetchPriority="high" />
+        <link rel="preload" as="video" href="/assets/videos/zone-1-chaos.webm" type="video/webm" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=Michroma&family=Inter:wght@200;300;400;600&display=swap" rel="stylesheet" />

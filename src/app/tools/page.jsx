@@ -62,7 +62,7 @@ const tools = [
     id: 'T-08',
     name: 'llms.txt Generator',
     desc: 'Draft a compliant llms.txt for your site so AI crawlers know what you are.',
-    live: false,
+    live: true,
   },
 ];
 

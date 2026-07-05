@@ -51,8 +51,15 @@ const tools = [
     live: true,
   },
   {
-    href: '/tools/llms-txt-generator',
+    href: '/design-ideas',
     id: 'T-07',
+    name: 'AI Design Ideas Generator',
+    desc: 'Input your domain and let AI generate structural, layout, and UX ideas rooted in behavioral psychology.',
+    live: true,
+  },
+  {
+    href: '/tools/llms-txt-generator',
+    id: 'T-08',
     name: 'llms.txt Generator',
     desc: 'Draft a compliant llms.txt for your site so AI crawlers know what you are.',
     live: false,

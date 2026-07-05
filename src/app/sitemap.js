@@ -28,7 +28,7 @@ export default function sitemap() {
   ];
   return routes.map(({ path, priority }) => ({
     url: `${BASE}${path}`,
-    lastModified: new Date(),
+    lastModified: new Date().toISOString().split('T')[0],
     changeFrequency: 'monthly',
     priority,
   }));

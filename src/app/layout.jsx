@@ -48,7 +48,7 @@ export default function RootLayout({ children }) {
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "sales",
-          "email": "deploy@www.gobiya.com"
+          "email": "deploy@gobiya.com"
         }
       },
       {

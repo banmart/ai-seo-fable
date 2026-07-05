@@ -4,7 +4,7 @@ export default function Footer() {
     <footer className="site-footer">
       <p className="mono">
         GOBIYA — PROGRAMMATIC SEARCH ARCHITECTURE. © 2026.{' '}
-        <a href="mailto:deploy@gobiya.com">deploy@gobiya.com</a>
+        <a href="mailto:hello@gobiya.com">hello@gobiya.com</a>
       </p>
     </footer>
   );

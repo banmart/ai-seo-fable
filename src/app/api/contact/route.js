@@ -16,7 +16,7 @@ export async function POST(request) {
     }
 
     const { data, error } = await resend.emails.send({
-      from: 'Gobiya <onboarding@resend.dev>', // Using default onboarding email; change to a verified domain like deploy@gobiya.com later
+      from: 'Gobiya <onboarding@resend.dev>', // Using default onboarding email; change to a verified domain like hello@gobiya.com later
       to: ['banmart@gmail.com'],
       subject: `New Lead: ${formType} from ${domain}`,
       html: `

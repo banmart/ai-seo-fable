@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
+import { gsap } from 'gsap';
 import './DesignIdeas.css';
 
 const LOADING_MESSAGES = [
@@ -20,16 +21,38 @@ export default function DesignIdeasTool() {
   const [errorMsg, setErrorMsg] = useState('');
   const [expanded, setExpanded] = useState(null); // concept shown in the lightbox
   const timerRef = useRef(null);
+  const resultsRef = useRef(null);
+  const lightboxRef = useRef(null);
 
   useEffect(() => () => clearInterval(timerRef.current), []);
 
-  // Close the lightbox on Escape
+  // Close the lightbox on Escape; zoom it open with GSAP
   useEffect(() => {
     if (!expanded) return;
     const onKey = (e) => { if (e.key === 'Escape') setExpanded(null); };
     window.addEventListener('keydown', onKey);
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches && lightboxRef.current) {
+      gsap.from(lightboxRef.current, { opacity: 0, duration: 0.25, ease: 'power2.out' });
+      gsap.from(lightboxRef.current.querySelector('img'), { scale: 0.92, duration: 0.35, ease: 'power3.out' });
+    }
     return () => window.removeEventListener('keydown', onKey);
   }, [expanded]);
+
+  // Stagger the concept cards in once results render
+  useEffect(() => {
+    if (state !== 'RESULTS' || !resultsRef.current) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const cards = resultsRef.current.querySelectorAll('.ideas-gallery-card');
+    gsap.from(cards, {
+      y: 44,
+      opacity: 0,
+      scale: 0.97,
+      duration: 0.9,
+      ease: 'power3.out',
+      stagger: 0.18,
+      clearProps: 'all',
+    });
+  }, [state]);
 
   const downloadName = (title) =>
     `gobiya-design-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}.png`;
@@ -135,7 +158,7 @@ export default function DesignIdeasTool() {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
+          <div ref={resultsRef} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
             {concepts.map((res, i) => (
               <article key={i} className="ideas-gallery-card" style={{ padding: 0, overflow: 'hidden', background: 'rgba(0, 0, 0, 0.4)', border: '1px solid var(--border)', borderRadius: '6px' }}>
                 {/* Faux browser chrome — frames the render like a live site */}
@@ -202,6 +225,7 @@ export default function DesignIdeasTool() {
 
       {expanded && (
         <div
+          ref={lightboxRef}
           role="dialog"
           aria-modal="true"
           aria-label={`${expanded.title} — full view`}

@@ -23,7 +23,11 @@ async function getPageSpeed(url) {
       `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=mobile&category=PERFORMANCE${key}`,
       { signal: AbortSignal.timeout(40000) }
     );
-    if (!res.ok) return null;
+    if (!res.ok) {
+      const detail = await res.text().catch(() => '');
+      console.error(`PSI ${res.status}:`, detail.slice(0, 300));
+      return null;
+    }
     const data = await res.json();
     const lh = data.lighthouseResult;
     const audits = lh?.audits ?? {};
@@ -44,7 +48,8 @@ async function getPageSpeed(url) {
         overall: data.loadingExperience?.overall_category ?? null,
       } : null,
     };
-  } catch {
+  } catch (err) {
+    console.error('PSI fetch failed:', err.message);
     return null; // performance data is an enrichment, never a blocker
   }
 }

@@ -9,7 +9,7 @@ import {
 } from '../_lib/toolkit';
 
 export const runtime = 'nodejs';
-export const maxDuration = 60; // PageSpeed Insights can take ~20-30s
+export const maxDuration = 90; // PageSpeed Insights can take 30-60s on heavy pages
 
 const cache = createCache();
 
@@ -21,7 +21,7 @@ async function getPageSpeed(url) {
     const key = process.env.PAGESPEED_API_KEY ? `&key=${process.env.PAGESPEED_API_KEY}` : '';
     const res = await fetch(
       `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=mobile&category=PERFORMANCE${key}`,
-      { signal: AbortSignal.timeout(40000) }
+      { signal: AbortSignal.timeout(70000) }
     );
     if (!res.ok) {
       const detail = await res.text().catch(() => '');

@@ -37,22 +37,36 @@ async function gemini(model, body, timeoutMs = 45000) {
 
 /* Stage 1 — derive three design concepts from the input (and homepage if live). */
 async function generateConcepts(input, siteContext) {
-  const prompt = `You are a senior web designer at an elite agency that builds dark, futuristic, conversion-optimized websites.
+  const prompt = `You are the creative director of an elite digital agency whose sites win Awwwards Site of the Day. You art-direct premium, conversion-optimized homepages for high-end clients.
 
 The prospect entered: "${input}"
 ${siteContext ? `Their current homepage says:\n${siteContext}\n` : 'No live site was reachable — infer the business from the domain/keywords alone.'}
 
-Produce exactly 3 distinct homepage design concepts tailored to THIS business. Vary the direction (e.g. bold/dark, clean/minimal, editorial/premium). For each concept write an image-generation prompt that describes a full desktop website homepage mockup: hero section, headline text idea, navigation, layout structure, color palette, typography feel, and one conversion element. The mockup must look like a real rendered website screenshot, not an illustration.
+Produce exactly 3 radically distinct homepage design concepts tailored to THIS business — each one should feel like it came from a different world-class studio:
+1. A bold, dramatic direction (dark, cinematic, high contrast)
+2. An ultra-clean minimal luxury direction (generous whitespace, restrained palette)
+3. An editorial / expressive direction (oversized typography, art-directed imagery, asymmetric grid)
+
+For EACH concept define a complete art direction:
+- A precise color palette of exactly 4 hex colors (background, surface, text, one striking accent)
+- A typography pairing (display font style + body font style, described by feel: e.g. "high-contrast serif display / grotesque sans body")
+- A signature "wow" element: the one memorable visual device (e.g. kinetic hero typography, floating 3D product, split-screen scroll, oversized numerals, full-bleed video hero)
+- A realistic headline (max 7 words) written in the brand's voice — never lorem ipsum
+
+Then write the imagePrompt: a single richly detailed paragraph describing the full desktop homepage as a pixel-perfect rendered screenshot. Specify: the brand/logo wordmark text in quotes (invent a fitting business name from the input — never a placeholder), the exact hero layout and headline text in quotes, navigation bar contents (4-5 short items), the signature wow element, 2 sections visible below the hero, button labels in quotes, the 4 hex colors and where each is used, typography treatment, spacing rhythm, and photographic/3D imagery style. IMPORTANT: design with almost no small body text — the layout must communicate through large headlines, short labels, numbers, buttons, and imagery; explicitly say "no paragraphs of body copy". Demand crisp legible UI text, consistent 8px spacing grid, and true screenshot realism — never an illustration, never a sketch, no device frame, no perspective tilt.
 
 Return JSON only: an array of 3 objects with keys:
-- "title": short concept name (3-5 words)
+- "title": evocative concept name (2-4 words)
 - "tag": 1-2 word category label, uppercase
-- "desc": one sentence selling the concept to the business owner
-- "imagePrompt": the full image prompt (start it with "High-fidelity desktop website homepage mockup UI screenshot,")`;
+- "desc": one sentence selling the concept to the business owner, naming its wow element
+- "palette": array of exactly 4 hex color strings
+- "fonts": the typography pairing in under 8 words
+- "imagePrompt": the full image prompt paragraph`;
 
   const data = await gemini(TEXT_MODEL, {
     contents: [{ parts: [{ text: prompt }] }],
     generationConfig: {
+      temperature: 1.1,
       responseMimeType: 'application/json',
       responseSchema: {
         type: 'ARRAY',
@@ -64,9 +78,11 @@ Return JSON only: an array of 3 objects with keys:
             title: { type: 'STRING' },
             tag: { type: 'STRING' },
             desc: { type: 'STRING' },
+            palette: { type: 'ARRAY', items: { type: 'STRING' } },
+            fonts: { type: 'STRING' },
             imagePrompt: { type: 'STRING' },
           },
-          required: ['title', 'tag', 'desc', 'imagePrompt'],
+          required: ['title', 'tag', 'desc', 'palette', 'fonts', 'imagePrompt'],
         },
       },
     },
@@ -78,14 +94,18 @@ Return JSON only: an array of 3 objects with keys:
   return concepts.slice(0, 3);
 }
 
+/* Quality wrapper applied to every Nano Banana render. */
+const RENDER_PREFIX = 'Award-winning premium website design, pixel-perfect high-fidelity desktop homepage UI screenshot, world-class design portfolio quality, rendered in a modern browser at 1440px width, razor-sharp legible interface text, professional typographic hierarchy, consistent spacing grid, subtle depth and layering, color-graded photography. ';
+const RENDER_SUFFIX = ' All visible text must be short, large and perfectly legible — headlines, nav labels, buttons and numbers only; no paragraphs of small body copy anywhere. Flat frontal screenshot filling the entire frame edge to edge — no browser chrome, no device mockup, no perspective, no hands, no watermark, not an illustration.';
+
 /* Stage 2 — render one concept with Nano Banana. Returns a data URL or null. */
 async function renderMockup(imagePrompt) {
   try {
     const data = await gemini(IMAGE_MODEL, {
-      contents: [{ parts: [{ text: imagePrompt }] }],
+      contents: [{ parts: [{ text: RENDER_PREFIX + imagePrompt + RENDER_SUFFIX }] }],
       generationConfig: {
         responseModalities: ['TEXT', 'IMAGE'],
-        imageConfig: { aspectRatio: '4:3' },
+        imageConfig: { aspectRatio: '3:4' }, // portrait — hero plus sections below the fold
       },
     }, 55000);
     const part = data.candidates?.[0]?.content?.parts?.find((p) => p.inlineData);
@@ -136,7 +156,12 @@ export async function POST(request) {
     const concepts = await generateConcepts(input, siteContext);
     const images = await Promise.all(concepts.map((c) => renderMockup(c.imagePrompt)));
     const results = concepts.map((c, i) => ({
-      title: c.title, tag: c.tag, desc: c.desc, image: images[i],
+      title: c.title,
+      tag: c.tag,
+      desc: c.desc,
+      palette: (c.palette ?? []).filter((h) => /^#[0-9a-f]{3,8}$/i.test(h)).slice(0, 4),
+      fonts: c.fonts ?? null,
+      image: images[i],
     }));
     if (!results.some((r) => r.image)) {
       return Response.json({ error: 'Image generation failed. Try again shortly.' }, { status: 502 });

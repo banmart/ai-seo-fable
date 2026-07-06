@@ -137,7 +137,16 @@ export default function DesignIdeasTool() {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
             {concepts.map((res, i) => (
-              <article key={i} className="ideas-gallery-card" style={{ padding: 0, overflow: 'hidden', background: 'rgba(0, 0, 0, 0.4)', border: '1px solid var(--border)', borderRadius: '4px' }}>
+              <article key={i} className="ideas-gallery-card" style={{ padding: 0, overflow: 'hidden', background: 'rgba(0, 0, 0, 0.4)', border: '1px solid var(--border)', borderRadius: '6px' }}>
+                {/* Faux browser chrome — frames the render like a live site */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 0.9rem', background: 'rgba(255,255,255,0.04)', borderBottom: '1px solid var(--border)' }}>
+                  <span style={{ width: 9, height: 9, borderRadius: '50%', background: '#ff5f57' }} />
+                  <span style={{ width: 9, height: 9, borderRadius: '50%', background: '#febc2e' }} />
+                  <span style={{ width: 9, height: 9, borderRadius: '50%', background: '#28c840' }} />
+                  <span className="mono" style={{ marginLeft: '0.75rem', fontSize: '0.65rem', color: 'var(--text-dim)', letterSpacing: '0.08em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {res.title.toLowerCase().replace(/[^a-z0-9]+/g, '')}.concept
+                  </span>
+                </div>
                 <div className="ideas-img-wrap" style={{ position: 'relative' }}>
                   <button
                     type="button"
@@ -160,11 +169,25 @@ export default function DesignIdeasTool() {
                   </a>
                 </div>
                 <div style={{ padding: '1.5rem' }}>
-                  <span className="gallery-tag mono" style={{ fontSize: '0.7rem', padding: '0.2rem 0.5rem', background: 'var(--border)', borderRadius: '2px', display: 'inline-block', marginBottom: '1rem' }}>
-                    {res.tag}
-                  </span>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', marginBottom: '1rem' }}>
+                    <span className="gallery-tag mono" style={{ fontSize: '0.7rem', padding: '0.2rem 0.5rem', background: 'var(--border)', borderRadius: '2px' }}>
+                      {res.tag}
+                    </span>
+                    {res.palette?.length > 0 && (
+                      <span style={{ display: 'flex', gap: '0.35rem' }} aria-label="Concept color palette">
+                        {res.palette.map((hex) => (
+                          <span key={hex} title={hex} style={{ width: 16, height: 16, borderRadius: '50%', background: hex, border: '1px solid rgba(255,255,255,0.25)' }} />
+                        ))}
+                      </span>
+                    )}
+                  </div>
                   <h3 style={{ fontSize: '1.1rem', marginBottom: '0.8rem', color: 'var(--cyan)' }}>{res.title}</h3>
                   <p style={{ color: 'var(--text-dim)', fontSize: '0.9rem', lineHeight: '1.5' }}>{res.desc}</p>
+                  {res.fonts && (
+                    <p className="mono" style={{ marginTop: '0.9rem', fontSize: '0.65rem', color: 'var(--text-dim)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+                      TYPE — {res.fonts}
+                    </p>
+                  )}
                 </div>
               </article>
             ))}

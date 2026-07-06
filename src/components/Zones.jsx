@@ -121,19 +121,20 @@ function ZoneApex() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('loading');
-    
-    // Fallback to mailto instead of Resend API
-    const subject = encodeURIComponent('Deployment Brief Request');
-    const body = encodeURIComponent(`Form: Deployment Brief\nEmail: ${email}\nDomain: ${domain}`);
-    const mailtoLink = document.createElement('a');
-    mailtoLink.href = `mailto:banmart@gmail.com?subject=${subject}&body=${body}`;
-    mailtoLink.click();
-    
-    setTimeout(() => {
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, domain, formType: 'Deployment Brief' }),
+      });
+      if (!res.ok) throw new Error('send failed');
       setStatus('success');
       setEmail('');
       setDomain('');
-    }, 1000);
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -148,8 +149,8 @@ function ZoneApex() {
         
         {status === 'success' ? (
           <div className="deploy-form" style={{ textAlign: 'center', padding: '3rem 0' }}>
-            <h3 style={{ color: 'var(--cyan)' }}>// TRANSMISSION PREPARED</h3>
-            <p>Your email client should have opened to complete the request.</p>
+            <h3 style={{ color: 'var(--cyan)' }}>// TRANSMISSION RECEIVED</h3>
+            <p>Your deployment brief request is in. We respond within 1 business day.</p>
           </div>
         ) : (
           <form className="deploy-form" onSubmit={handleSubmit} aria-label="Discovery inquiry">

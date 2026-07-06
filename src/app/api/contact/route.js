@@ -32,8 +32,10 @@ export async function POST(request) {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     const { data, error } = await resend.emails.send({
-      from: 'Gobiya <onboarding@resend.dev>', // Using default onboarding email; change to a verified domain like hello@gobiya.com later
-      to: ['banmart@gmail.com'],
+      // Defaults work with Resend's sandbox sender; once gobiya.com is a
+      // verified domain in Resend, set CONTACT_FROM="Gobiya <hello@gobiya.com>"
+      from: process.env.CONTACT_FROM ?? 'Gobiya <onboarding@resend.dev>',
+      to: [process.env.CONTACT_TO ?? 'banmart@gmail.com'],
       replyTo: email,
       subject: `New Lead: ${formType} from ${domain}`.slice(0, 200),
       html: `

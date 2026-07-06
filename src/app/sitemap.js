@@ -12,6 +12,7 @@ export default function sitemap() {
     { path: '/tools/conversion-trust-audit', priority: 0.9 },
     { path: '/tools/llms-txt-generator', priority: 0.9 },
     { path: '/tools/design-ideas', priority: 0.9 },
+    { path: '/tools/backlink-checker', priority: 0.9 },
     { path: '/problems', priority: 0.7 },
     { path: '/problems/invisible-to-ai', priority: 0.8 },
     { path: '/problems/google-penalty', priority: 0.8 },

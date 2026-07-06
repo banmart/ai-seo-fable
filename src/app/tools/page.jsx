@@ -64,6 +64,13 @@ const tools = [
     desc: 'Draft a compliant llms.txt in seconds so ChatGPT, Perplexity, and Google AI crawlers know what your site is, what it does, and which endpoints matter.',
     live: true,
   },
+  {
+    href: '/tools/backlink-checker',
+    id: 'T-09',
+    name: 'Backlink Checker',
+    desc: 'Authority score, referring domains, and the top sites linking to any domain — pulled from a 4.3B-edge Common Crawl link graph.',
+    live: true,
+  },
 ];
 
 export default function ToolsPage() {

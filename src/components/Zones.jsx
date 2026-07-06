@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Tooltip from './Tooltip';
 
 /* Zones — five scroll-scrub sections */
 
@@ -15,9 +14,7 @@ function ZoneChaos() {
           GOBIYA architects programmatic search ecosystems for high-growth enterprises.
           Search is not a channel. It is infrastructure — and infrastructure is engineered, not guessed.
         </p>
-        <Tooltip text="Scroll down to Semantic Layer">
-          <a className="cta cta--ghost" href="#integration">Initiate Descent ↓</a>
-        </Tooltip>
+        <a className="cta cta--ghost" href="#integration" title="Scroll down to Semantic Layer">Initiate Descent ↓</a>
       </div>
     </section>
   );
@@ -180,14 +177,10 @@ function ZoneApex() {
             />
             
             <div className="cta-group" style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap', marginTop: '1rem' }}>
-              <Tooltip text="Start project scoping">
-                <button className="cta" type="submit" disabled={status === 'loading'}>
-                  {status === 'loading' ? 'PREPARING...' : 'Request Deployment Brief →'}
-                </button>
-              </Tooltip>
-              <Tooltip text="Call for immediate assistance">
-                <a className="cta cta--ghost mono" href="tel:3237441338">📞 (323) 744-1338</a>
-              </Tooltip>
+              <button className="cta" type="submit" disabled={status === 'loading'} title="Start project scoping">
+                {status === 'loading' ? 'PREPARING...' : 'Request Deployment Brief →'}
+              </button>
+              <a className="cta cta--ghost mono" href="tel:3237441338" title="Call for immediate assistance">📞 (323) 744-1338</a>
             </div>
             
             {status === 'error' && (
@@ -199,11 +192,9 @@ function ZoneApex() {
         )}
         
         <div style={{ marginTop: '3rem', display: 'flex', justifyContent: 'flex-start' }}>
-          <Tooltip text="View CEO profile">
-            <a className="cta cta--ghost" href="/about/steve-martin" style={{ textDecoration: 'none' }}>
-              Learn about Steve Martin →
-            </a>
-          </Tooltip>
+          <a className="cta cta--ghost" href="/about/steve-martin" style={{ textDecoration: 'none' }} title="View CEO profile">
+            Learn about Steve Martin →
+          </a>
         </div>
       </div>
     </section>

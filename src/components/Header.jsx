@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import MenuOverlay from './MenuOverlay';
-import Tooltip from './Tooltip';
 
 /* Header — fixed site header with brand and deploy CTA */
 export default function Header() {
@@ -14,16 +13,15 @@ export default function Header() {
         <a className="brand" href="/">
           GOBIYA<span className="brand__tick">_</span>
         </a>
-        <Tooltip text="Toggle navigation matrix">
-          <button 
-            className="menu-toggle mono" 
-            onClick={() => setIsMenuOpen(true)}
-            aria-label="Open navigation menu"
-            aria-expanded={isMenuOpen}
-          >
-            [ SYS.NAV ]
-          </button>
-        </Tooltip>
+        <button
+          className="menu-toggle mono"
+          onClick={() => setIsMenuOpen(true)}
+          aria-label="Open navigation menu"
+          aria-expanded={isMenuOpen}
+          title="Toggle navigation matrix"
+        >
+          [ SYS.NAV ]
+        </button>
       </header>
       <MenuOverlay isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </>

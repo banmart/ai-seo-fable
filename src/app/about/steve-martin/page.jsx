@@ -1,5 +1,4 @@
 import SubpageLayout from '../../../components/SubpageLayout';
-import Tooltip from '../../../components/Tooltip';
 import './SteveMartin.css';
 
 export const metadata = {
@@ -122,12 +121,8 @@ export default function SteveMartinPage() {
       </section>
 
       <div className="cta-group" style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
-        <Tooltip text="Request deployment brief">
-          <a className="cta" href="/#apex">Work with Steve →</a>
-        </Tooltip>
-        <Tooltip text="Call Steve directly">
-          <a className="cta cta--ghost mono" href="tel:3237441338">📞 (323) 744-1338</a>
-        </Tooltip>
+        <a className="cta" href="/#apex" title="Request deployment brief">Work with Steve →</a>
+        <a className="cta cta--ghost mono" href="tel:3237441338" title="Call Steve directly">📞 (323) 744-1338</a>
       </div>
     </SubpageLayout>
   );

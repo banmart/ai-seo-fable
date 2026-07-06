@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import './AgedDomain.css';
-import Tooltip from '../../../components/Tooltip';
 
 const CHECKLIST_ITEMS = [
   "Deploying naming agents",
@@ -104,46 +103,42 @@ export default function AgedDomainTool() {
             >
               ✨ AI names
             </button>
-            <Tooltip text="Prefix keyword search">
-              <button
-                type="button"
-                className={`filter-pill ${activeFilter === 'starts' ? 'active' : ''}`}
-                onClick={() => setActiveFilter('starts')}
-              >
-                {keyword ? `${keyword}---` : 'Starts with'}
-              </button>
-            </Tooltip>
-            <Tooltip text="Anywhere keyword search">
-              <button
-                type="button"
-                className={`filter-pill ${activeFilter === 'contains' ? 'active' : ''}`}
-                onClick={() => setActiveFilter('contains')}
-              >
-                {keyword ? `---${keyword}---` : 'Contains'}
-              </button>
-            </Tooltip>
-            <Tooltip text="Suffix keyword search">
-              <button
-                type="button"
-                className={`filter-pill ${activeFilter === 'ends' ? 'active' : ''}`}
-                onClick={() => setActiveFilter('ends')}
-              >
-                {keyword ? `---${keyword}` : 'Ends with'}
-              </button>
-            </Tooltip>
+            <button
+              type="button"
+              className={`filter-pill ${activeFilter === 'starts' ? 'active' : ''}`}
+              onClick={() => setActiveFilter('starts')}
+              title="Prefix keyword search"
+            >
+              {keyword ? `${keyword}---` : 'Starts with'}
+            </button>
+            <button
+              type="button"
+              className={`filter-pill ${activeFilter === 'contains' ? 'active' : ''}`}
+              onClick={() => setActiveFilter('contains')}
+              title="Anywhere keyword search"
+            >
+              {keyword ? `---${keyword}---` : 'Contains'}
+            </button>
+            <button
+              type="button"
+              className={`filter-pill ${activeFilter === 'ends' ? 'active' : ''}`}
+              onClick={() => setActiveFilter('ends')}
+              title="Suffix keyword search"
+            >
+              {keyword ? `---${keyword}` : 'Ends with'}
+            </button>
           </div>
           
-          <Tooltip text="Restrict search to .com TLDs">
-            <div 
+            <div
               className={`toggle-container ${comOnly ? 'active' : ''}`}
               onClick={() => setComOnly(!comOnly)}
+              title="Restrict search to .com TLDs"
             >
               <div className={`toggle-switch ${comOnly ? 'active' : ''}`}>
                 <div className="toggle-knob"></div>
               </div>
               <span className="toggle-label">.com only</span>
             </div>
-          </Tooltip>
         </div>
       </form>
 

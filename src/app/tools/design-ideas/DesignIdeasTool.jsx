@@ -18,9 +18,21 @@ export default function DesignIdeasTool() {
   const [loadingMsgIdx, setLoadingMsgIdx] = useState(0);
   const [concepts, setConcepts] = useState([]);
   const [errorMsg, setErrorMsg] = useState('');
+  const [expanded, setExpanded] = useState(null); // concept shown in the lightbox
   const timerRef = useRef(null);
 
   useEffect(() => () => clearInterval(timerRef.current), []);
+
+  // Close the lightbox on Escape
+  useEffect(() => {
+    if (!expanded) return;
+    const onKey = (e) => { if (e.key === 'Escape') setExpanded(null); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [expanded]);
+
+  const downloadName = (title) =>
+    `gobiya-design-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}.png`;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -126,8 +138,26 @@ export default function DesignIdeasTool() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
             {concepts.map((res, i) => (
               <article key={i} className="ideas-gallery-card" style={{ padding: 0, overflow: 'hidden', background: 'rgba(0, 0, 0, 0.4)', border: '1px solid var(--border)', borderRadius: '4px' }}>
-                <div className="ideas-img-wrap">
-                  <img src={res.image} alt={`${res.title} — website mockup concept`} loading="lazy" style={{ width: '100%', height: 'auto', display: 'block' }} />
+                <div className="ideas-img-wrap" style={{ position: 'relative' }}>
+                  <button
+                    type="button"
+                    onClick={() => setExpanded(res)}
+                    title="Click to expand to full view"
+                    aria-label={`Expand ${res.title} mockup to full view`}
+                    style={{ display: 'block', width: '100%', padding: 0, border: 'none', background: 'none', cursor: 'zoom-in' }}
+                  >
+                    <img src={res.image} alt={`${res.title} — website mockup concept`} loading="lazy" style={{ width: '100%', height: 'auto', display: 'block' }} />
+                  </button>
+                  <a
+                    href={res.image}
+                    download={downloadName(res.title)}
+                    title="Download this mockup as PNG"
+                    onClick={(e) => e.stopPropagation()}
+                    className="cta cta--ghost mono"
+                    style={{ position: 'absolute', top: '0.75rem', right: '0.75rem', padding: '0.4rem 0.8rem', fontSize: '0.7rem', background: 'rgba(0,0,0,0.65)' }}
+                  >
+                    ↓ PNG
+                  </a>
                 </div>
                 <div style={{ padding: '1.5rem' }}>
                   <span className="gallery-tag mono" style={{ fontSize: '0.7rem', padding: '0.2rem 0.5rem', background: 'var(--border)', borderRadius: '2px', display: 'inline-block', marginBottom: '1rem' }}>
@@ -145,6 +175,54 @@ export default function DesignIdeasTool() {
             <a className="cta cta--ghost mono" href="tel:3237441338">📞 (323) 744-1338</a>
           </div>
         </section>
+      )}
+
+      {expanded && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${expanded.title} — full view`}
+          onClick={() => setExpanded(null)}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 1000,
+            background: 'rgba(0, 0, 0, 0.92)',
+            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+            padding: '2rem', cursor: 'zoom-out',
+          }}
+        >
+          <img
+            src={expanded.image}
+            alt={`${expanded.title} — full-size website mockup`}
+            onClick={(e) => e.stopPropagation()}
+            style={{ maxWidth: '92vw', maxHeight: '78vh', width: 'auto', height: 'auto', border: '1px solid var(--border)', borderRadius: '4px', cursor: 'default' }}
+          />
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginTop: '1.5rem', flexWrap: 'wrap', justifyContent: 'center', cursor: 'default' }}
+          >
+            <span className="mono" style={{ color: 'var(--text-dim)', fontSize: '0.8rem', letterSpacing: '0.1em' }}>
+              {expanded.title.toUpperCase()}
+            </span>
+            <a
+              className="cta mono"
+              href={expanded.image}
+              download={downloadName(expanded.title)}
+              title="Download this mockup as PNG"
+              style={{ padding: '0.6rem 1.4rem', fontSize: '0.8rem' }}
+            >
+              ↓ DOWNLOAD PNG
+            </a>
+            <button
+              type="button"
+              className="cta cta--ghost mono"
+              onClick={() => setExpanded(null)}
+              title="Close full view (Esc)"
+              style={{ padding: '0.6rem 1.4rem', fontSize: '0.8rem' }}
+            >
+              ✕ CLOSE
+            </button>
+          </div>
+        </div>
       )}
     </>
   );

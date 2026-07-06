@@ -4,6 +4,7 @@ const nextConfig = {
     return [
       { source: '/book', destination: '/#apex', permanent: true },
       { source: '/contact', destination: '/#apex', permanent: true },
+      { source: '/design-ideas', destination: '/tools/design-ideas', permanent: true },
       { source: '/about', destination: '/about/steve-martin', permanent: true },
       { source: '/creativity', destination: '/', permanent: true },
       { source: '/insights', destination: '/', permanent: true },

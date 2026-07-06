@@ -51,7 +51,7 @@ const tools = [
     live: true,
   },
   {
-    href: '/design-ideas',
+    href: '/tools/design-ideas',
     id: 'T-07',
     name: 'AI Design Ideas Generator',
     desc: 'Input your domain and let AI generate structural, layout, and UX ideas rooted in behavioral psychology.',

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from 'react';
-import SubpageLayout from '../../components/SubpageLayout';
 import './DesignIdeas.css';
 
 const MOCK_RESULTS = [
@@ -35,7 +34,7 @@ const LOADING_MESSAGES = [
   'Rendering premium UI mockups...',
 ];
 
-export default function DesignIdeasPage() {
+export default function DesignIdeasTool() {
   const [domain, setDomain] = useState('');
   const [email, setEmail] = useState('');
   const [state, setState] = useState('IDLE'); // IDLE | LOADING | RESULTS
@@ -66,7 +65,7 @@ export default function DesignIdeasPage() {
   };
 
   return (
-    <SubpageLayout>
+    <>
       {state === 'IDLE' && (
         <section style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
           <p className="kicker mono">// GENERATIVE DESIGN ENGINE</p>
@@ -141,6 +140,6 @@ export default function DesignIdeasPage() {
           </div>
         </section>
       )}
-    </SubpageLayout>
+    </>
   );
 }

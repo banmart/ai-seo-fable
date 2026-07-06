@@ -186,13 +186,11 @@ function ZoneApex() {
                 </p>
               )}
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
-              <a className="cta cta--ghost mono" href="tel:3237441338" title="Call for immediate assistance">📞 (323) 744-1338</a>
-            </div>
           </form>
         )}
         
-        <div style={{ marginTop: '3rem', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ width: '100vw', position: 'relative', left: '50%', transform: 'translateX(-50%)', display: 'flex', justifyContent: 'center', gap: '2rem', marginTop: '3rem', flexWrap: 'wrap' }}>
+          <a className="cta cta--ghost mono" href="tel:3237441338" title="Call for immediate assistance">📞 (323) 744-1338</a>
           <a className="cta cta--ghost" href="/about/steve-martin" style={{ textDecoration: 'none' }} title="View CEO profile">
             Learn about Steve Martin →
           </a>

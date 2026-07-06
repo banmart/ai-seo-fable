@@ -16,7 +16,7 @@ const CHECKLIST_ITEMS = [
 
 export default function AgedDomainTool() {
   const [keyword, setKeyword] = useState('');
-  const [activeFilter, setActiveFilter] = useState('all');
+  const [activeFilter, setActiveFilter] = useState('contains');
   const [comOnly, setComOnly] = useState(true);
   const [status, setStatus] = useState('IDLE'); // IDLE, LOADING, COMPLETE, ERROR
   const [errorMsg, setErrorMsg] = useState('');

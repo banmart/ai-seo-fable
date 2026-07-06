@@ -35,7 +35,8 @@ export async function POST(request) {
       // Defaults work with Resend's sandbox sender; once gobiya.com is a
       // verified domain in Resend, set CONTACT_FROM="Gobiya <hello@gobiya.com>"
       from: process.env.CONTACT_FROM ?? 'Gobiya <onboarding@resend.dev>',
-      to: [process.env.CONTACT_TO ?? 'banmart@gmail.com'],
+      // Resend sandbox sender only delivers to the account owner's address
+      to: [process.env.CONTACT_TO ?? 'steve@gobiya.com'],
       replyTo: email,
       subject: `New Lead: ${formType} from ${domain}`.slice(0, 200),
       html: `

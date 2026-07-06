@@ -176,17 +176,17 @@ function ZoneApex() {
               disabled={status === 'loading'}
             />
             
-            <div className="cta-group" style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap', marginTop: '1rem', justifyContent: 'center' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <button className="cta" type="submit" disabled={status === 'loading'} title="Start project scoping">
-                  {status === 'loading' ? 'PREPARING...' : 'Request Deployment Brief →'}
-                </button>
-                {status === 'error' && (
-                  <p style={{ color: 'var(--alert)', marginTop: '0.5rem', fontSize: '0.9rem', textAlign: 'center' }}>
-                    Transmission failed. Please try again or email us directly.
-                  </p>
-                )}
-              </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginTop: '1rem' }}>
+              <button className="cta" type="submit" disabled={status === 'loading'} title="Start project scoping">
+                {status === 'loading' ? 'PREPARING...' : 'Request Deployment Brief →'}
+              </button>
+              {status === 'error' && (
+                <p style={{ color: 'var(--alert)', marginTop: '0.5rem', fontSize: '0.9rem' }}>
+                  Transmission failed. Please try again or email us directly.
+                </p>
+              )}
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
               <a className="cta cta--ghost mono" href="tel:3237441338" title="Call for immediate assistance">📞 (323) 744-1338</a>
             </div>
           </form>

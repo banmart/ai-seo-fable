@@ -9,8 +9,45 @@ import {
 } from '../_lib/toolkit';
 
 export const runtime = 'nodejs';
+export const maxDuration = 60; // PageSpeed Insights can take ~20-30s
 
 const cache = createCache();
+
+/* Google PageSpeed Insights v5 — Lighthouse lab metrics plus CrUX real-user
+   field data (LCP / INP / CLS). Keyless works at low volume; set
+   PAGESPEED_API_KEY for production quota (25k/day free). */
+async function getPageSpeed(url) {
+  try {
+    const key = process.env.PAGESPEED_API_KEY ? `&key=${process.env.PAGESPEED_API_KEY}` : '';
+    const res = await fetch(
+      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=mobile&category=PERFORMANCE${key}`,
+      { signal: AbortSignal.timeout(40000) }
+    );
+    if (!res.ok) return null;
+    const data = await res.json();
+    const lh = data.lighthouseResult;
+    const audits = lh?.audits ?? {};
+    const metrics = data.loadingExperience?.metrics ?? null;
+    const fm = (k) => (metrics?.[k] ? { category: metrics[k].category, percentile: metrics[k].percentile } : null);
+    return {
+      score: lh?.categories?.performance?.score != null ? Math.round(lh.categories.performance.score * 100) : null,
+      lab: {
+        lcp: audits['largest-contentful-paint']?.displayValue ?? null,
+        cls: audits['cumulative-layout-shift']?.displayValue ?? null,
+        tbt: audits['total-blocking-time']?.displayValue ?? null,
+        fcp: audits['first-contentful-paint']?.displayValue ?? null,
+      },
+      field: metrics ? {
+        lcp: fm('LARGEST_CONTENTFUL_PAINT_MS'),
+        inp: fm('INTERACTION_TO_NEXT_PAINT'),
+        cls: fm('CUMULATIVE_LAYOUT_SHIFT_SCORE'),
+        overall: data.loadingExperience?.overall_category ?? null,
+      } : null,
+    };
+  } catch {
+    return null; // performance data is an enrichment, never a blocker
+  }
+}
 
 function attr(html, re) {
   const m = html.match(re);
@@ -172,12 +209,37 @@ export async function POST(request) {
   }
 
   let robotsText = '';
-  try {
-    const r = await fetchText(`${target.origin}/robots.txt`, 6000);
-    if (r.ok) robotsText = r.text;
-  } catch { /* robots optional */ }
+  const [, cwv] = await Promise.all([
+    (async () => {
+      try {
+        const r = await fetchText(`${target.origin}/robots.txt`, 6000);
+        if (r.ok) robotsText = r.text;
+      } catch { /* robots optional */ }
+    })(),
+    getPageSpeed(target.url),
+  ]);
 
-  const result = { url: page.finalUrl, ...analyze(page.text, page.headers, robotsText, page.finalUrl) };
+  const result = { url: page.finalUrl, cwv, ...analyze(page.text, page.headers, robotsText, page.finalUrl) };
+  if (cwv?.score != null) {
+    const level = cwv.score >= 90 ? 'ok' : cwv.score >= 50 ? 'warn' : 'risk';
+    result.flags.push({ level, text: `GOOGLE PAGESPEED — ${cwv.score}/100 (MOBILE)` });
+    if (level !== 'ok') {
+      result.issues.push({
+        level,
+        title: `Google PageSpeed score is ${cwv.score}/100 on mobile`,
+        detail: `Lighthouse measured LCP ${cwv.lab.lcp ?? 'n/a'}, CLS ${cwv.lab.cls ?? 'n/a'}, total blocking time ${cwv.lab.tbt ?? 'n/a'}. Slow pages lose rankings and visitors — compress images, cut render-blocking scripts, and lazy-load below-the-fold content.`,
+      });
+    }
+  }
+  if (cwv?.field?.overall === 'SLOW') {
+    result.flags.push({ level: 'risk', text: 'CORE WEB VITALS — FAILING (REAL-USER DATA)' });
+    result.issues.push({
+      level: 'risk',
+      title: 'Real Chrome users experience this page as slow',
+      detail: 'Google\'s Chrome UX Report field data rates this URL "Slow" — this is the actual Core Web Vitals signal used in ranking, not a lab estimate. Prioritize LCP and INP fixes.',
+    });
+  }
+  result.issues.sort((a, b) => (a.level === 'risk' ? 0 : 1) - (b.level === 'risk' ? 0 : 1));
   cache.set(target.url, result);
   return Response.json(result);
 }

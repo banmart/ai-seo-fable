@@ -7,10 +7,10 @@ const rateBuckets = new Map();
 
 /* Buckets are keyed per tool + IP so heavy use of one tool doesn't burn
    another tool's quota. */
-export function rateLimited(ip, limit = RATE_LIMIT, scope = 'shared') {
+export function rateLimited(ip, limit = RATE_LIMIT, scope = 'shared', windowMs = 60 * 60 * 1000) {
   const now = Date.now();
   const key = `${scope}:${ip}`;
-  const bucket = rateBuckets.get(key)?.filter((t) => now - t < 60 * 60 * 1000) ?? [];
+  const bucket = rateBuckets.get(key)?.filter((t) => now - t < windowMs) ?? [];
   if (bucket.length >= limit) return true;
   bucket.push(now);
   rateBuckets.set(key, bucket);

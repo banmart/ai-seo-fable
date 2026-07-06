@@ -22,6 +22,8 @@ export default function AgedDomainTool() {
   const [status, setStatus] = useState('IDLE'); // IDLE, LOADING, COMPLETE, ERROR
   const [errorMsg, setErrorMsg] = useState('');
   const [results, setResults] = useState(null);
+  const [page, setPage] = useState(1);
+  const PAGE_SIZE = 8;
   
   // Progress animation state
   const [progressIdx, setProgressIdx] = useState(0);
@@ -60,6 +62,7 @@ export default function AgedDomainTool() {
       // Artificial delay to let the animation play a bit
       setTimeout(() => {
         setResults(data);
+        setPage(1);
         setStatus('COMPLETE');
       }, 3500);
     } catch (err) {
@@ -187,13 +190,35 @@ export default function AgedDomainTool() {
 
       {status === 'COMPLETE' && results && (
         <div className="tool-result">
+          {results.domains?.length > 0 && (
+            <ul className="proof-grid" style={{ marginTop: '1.5rem' }}>
+              <li>
+                <strong className="mono">{results.available ?? results.domains.length}</strong>
+                <span>available to register</span>
+              </li>
+              {results.checked != null && (
+                <li>
+                  <strong className="mono">{results.checked.toLocaleString()}</strong>
+                  <span>candidates verified live against the registry</span>
+                </li>
+              )}
+              <li>
+                <strong className="mono">{(results.tlds ?? ['com']).map((t) => `.${t}`).join(' ')}</strong>
+                <span>TLDs searched</span>
+              </li>
+              <li>
+                <strong className="mono">{results.mode === 'pattern' ? (results.position ?? 'pattern').toUpperCase() : 'AI NAMES'}</strong>
+                <span>search mode</span>
+              </li>
+            </ul>
+          )}
           <ul className="tool-issues" style={{ marginTop: '1.5rem' }}>
-            {results.domains?.length ? results.domains.map((domain, i) => {
+            {results.domains?.length ? results.domains.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map((domain, i) => {
               // Replace YOUR_AFFILIATE_ID with the actual ID later
               const affiliateLink = `https://www.namecheap.com/domains/registration/results/?domain=${domain.name}&affId=YOUR_AFFILIATE_ID`;
               
               return (
-                <li key={i} className="tool-issue tool-issue--ok">
+                <li key={domain.name} className="tool-issue tool-issue--ok">
                   <span className="tool-issue__tag">{domain.available ? 'AVAILABLE' : 'TAKEN'}</span>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', gap: '1rem', flexWrap: 'wrap' }}>
                     <div>
@@ -224,6 +249,32 @@ export default function AgedDomainTool() {
               </li>
             )}
           </ul>
+
+          {results.domains?.length > PAGE_SIZE && (
+            <nav aria-label="Result pages" style={{ display: 'flex', gap: '1rem', alignItems: 'center', justifyContent: 'center', marginTop: '2rem' }}>
+              <button
+                type="button"
+                className="cta cta--ghost mono"
+                style={{ padding: '0.5rem 1.2rem', fontSize: '0.8rem' }}
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={page === 1}
+              >
+                ← PREV
+              </button>
+              <span className="mono" style={{ color: 'var(--text-dim)', fontSize: '0.8rem', letterSpacing: '0.15em' }}>
+                PAGE {page} / {Math.ceil(results.domains.length / PAGE_SIZE)}
+              </span>
+              <button
+                type="button"
+                className="cta cta--ghost mono"
+                style={{ padding: '0.5rem 1.2rem', fontSize: '0.8rem' }}
+                onClick={() => setPage((p) => Math.min(Math.ceil(results.domains.length / PAGE_SIZE), p + 1))}
+                disabled={page >= Math.ceil(results.domains.length / PAGE_SIZE)}
+              >
+                NEXT →
+              </button>
+            </nav>
+          )}
         </div>
       )}
     </div>

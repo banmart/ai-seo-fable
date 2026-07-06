@@ -35,11 +35,11 @@ export async function POST(request) {
     params: usePattern
       ? {
           name: 'find_available_domains_by_pattern',
-          arguments: { keyword, position: filter, tlds: comOnly ? ['com'] : ['com', 'net', 'io', 'co'], limit: 24 },
+          arguments: { keyword, position: filter, tlds: comOnly ? ['com'] : ['com', 'net', 'io', 'co'], limit: 60 },
         }
       : {
           name: 'find_available_domains',
-          arguments: { keyword, count: 12 },
+          arguments: { keyword, count: 24 },
         },
   };
 
@@ -55,9 +55,19 @@ export async function POST(request) {
     const data = await mcpRes.json();
     if (data.error) throw new Error(data.error.message ?? 'Upstream MCP error');
 
-    const names = data.result?.structuredContent?.domains ?? [];
+    const sc = data.result?.structuredContent ?? {};
+    const names = sc.domains ?? [];
     const domains = names.map((name) => ({ name, available: true }));
-    return NextResponse.json({ domains, keyword, checked: data.result?.structuredContent?.checked ?? null });
+    return NextResponse.json({
+      domains,
+      keyword,
+      mode: usePattern ? 'pattern' : 'generative',
+      position: sc.position ?? null,
+      tlds: sc.tlds ?? (usePattern ? null : ['com']),
+      checked: sc.checked ?? null,      // candidates verified against the registry (pattern mode)
+      available: sc.available ?? names.length,
+      byTld: sc.byTld ?? null,
+    });
   } catch (error) {
     console.error('Domain search error:', error);
     return NextResponse.json(

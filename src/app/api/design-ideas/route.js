@@ -101,11 +101,6 @@ export async function POST(request) {
   if (!process.env.GEMINI_API_KEY) {
     return Response.json({ error: 'Design generation is not configured yet. Try again later.' }, { status: 503 });
   }
-  // Image generation is the expensive path — keep the per-IP budget tight.
-  if (rateLimited(clientIp(request), 3, 'design-ideas')) {
-    return Response.json({ error: 'Generation limit reached for now. Try again in an hour.' }, { status: 429 });
-  }
-
   let input;
   try {
     const body = await request.json();
@@ -115,6 +110,12 @@ export async function POST(request) {
   }
   if (input.length < 3) {
     return Response.json({ error: 'Enter a domain or a few keywords describing the business.' }, { status: 400 });
+  }
+
+  // Image generation is the expensive path — keep the per-IP budget tight.
+  // Checked after validation so a malformed submission doesn't burn quota.
+  if (rateLimited(clientIp(request), 2, 'design-ideas', 24 * 60 * 60 * 1000)) {
+    return Response.json({ error: 'Generation limit reached — 2 runs per day. Try again tomorrow.' }, { status: 429 });
   }
 
   // If the input looks like a live domain, read its homepage for grounding.

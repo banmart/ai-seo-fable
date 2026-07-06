@@ -1,4 +1,4 @@
-/* Schema & Rich Results API
+﻿/* Schema & Rich Results API
    Extracts JSON-LD from a page, validates required properties for common types,
    and reports rich-result eligibility and entity-schema gaps. No API keys. */
 
@@ -49,13 +49,13 @@ function analyze(html) {
 
   if (errors) {
     add('risk', `${errors} MALFORMED JSON-LD BLOCK(S)`);
-    issue('risk', `${errors} structured-data block(s) won't parse`, 'Invalid JSON-LD is silently ignored by search engines — you get zero credit for it and forfeit any rich results. Run each block through a JSON validator and fix the syntax.');
+    issue('risk', `${errors} structured-data block(s) won't parse`, 'Invalid JSON-LD is silently ignored by search engines â€” you get zero credit for it and forfeit any rich results. Run each block through a JSON validator and fix the syntax.');
   }
 
   if (!nodes.length && !errors) {
     add('risk', 'NO STRUCTURED DATA FOUND');
     issue('risk', 'No JSON-LD structured data', 'This page has no machine-readable schema. Search engines and AI systems have to infer everything about your business from prose. Add Organization or LocalBusiness schema as a baseline.');
-    return { flags, issues, score: 30, verdict: 'NO STRUCTURED DATA — MISSING A FOUNDATIONAL AI & RICH-RESULT SIGNAL', detected: [], entities: [] };
+    return { flags, issues, score: 30, verdict: 'NO STRUCTURED DATA â€” MISSING A FOUNDATIONAL AI & RICH-RESULT SIGNAL', detected: [], entities: [] };
   }
 
   // Validate required properties per node
@@ -72,7 +72,7 @@ function analyze(html) {
       }
       detected.push(entry);
       if (!entry.valid) {
-        add('warn', `${type.toUpperCase()} — MISSING ${entry.missing.join(', ').toUpperCase()}`);
+        add('warn', `${type.toUpperCase()} â€” MISSING ${entry.missing.join(', ').toUpperCase()}`);
         issue('warn', `${type} schema is incomplete`, `Missing required propert${entry.missing.length > 1 ? 'ies' : 'y'}: ${entry.missing.join(', ')}. Without these, Google won't show the rich result this type unlocks. Add the missing fields.`);
       }
     }
@@ -80,15 +80,15 @@ function analyze(html) {
 
   // Entity presence
   const hasEntity = types.some((t) => ENTITY_TYPES.includes(t));
-  if (hasEntity) add('ok', `ENTITY SCHEMA — ${types.filter((t) => ENTITY_TYPES.includes(t)).join(', ').toUpperCase()}`);
+  if (hasEntity) add('ok', `ENTITY SCHEMA â€” ${types.filter((t) => ENTITY_TYPES.includes(t)).join(', ').toUpperCase()}`);
   else {
     add('warn', 'NO ENTITY SCHEMA');
-    issue('warn', 'No Organization/LocalBusiness/Person schema', 'Entity schema is what tells AI systems and Google who you are — the anchor for your Knowledge Graph presence and AI citations. Add it site-wide, typically in the homepage @graph.');
+    issue('warn', 'No Organization/LocalBusiness/Person schema', 'Entity schema is what tells AI systems and Google who you are â€” the anchor for your Knowledge Graph presence and AI citations. Add it site-wide, typically in the homepage @graph.');
   }
 
   // Rich-result opportunities present
   const richPresent = types.filter((t) => RICH_TYPES.includes(t));
-  if (richPresent.length) add('ok', `RICH-RESULT TYPES — ${richPresent.join(', ').toUpperCase()}`);
+  if (richPresent.length) add('ok', `RICH-RESULT TYPES â€” ${richPresent.join(', ').toUpperCase()}`);
 
   // Common high-value gaps
   if (!types.includes('BreadcrumbList')) {
@@ -103,9 +103,9 @@ function analyze(html) {
   const risks = flags.filter((f) => f.level === 'risk').length;
   const warns = flags.filter((f) => f.level === 'warn').length;
   const score = Math.max(0, 100 - risks * 30 - warns * 8);
-  const verdict = risks > 0 ? 'STRUCTURED DATA BROKEN OR ABSENT — RICH RESULTS FORFEITED'
-    : warns > 0 ? 'SCHEMA PRESENT — GAPS LIMIT RICH-RESULT & AI ELIGIBILITY'
-    : 'STRUCTURED DATA — COMPLETE AND VALID';
+  const verdict = risks > 0 ? 'STRUCTURED DATA BROKEN OR ABSENT â€” RICH RESULTS FORFEITED'
+    : warns > 0 ? 'SCHEMA PRESENT â€” GAPS LIMIT RICH-RESULT & AI ELIGIBILITY'
+    : 'STRUCTURED DATA â€” COMPLETE AND VALID';
 
   issues.sort((a, b) => (a.level === 'risk' ? 0 : 1) - (b.level === 'risk' ? 0 : 1));
 
@@ -118,7 +118,7 @@ function analyze(html) {
 }
 
 export async function POST(request) {
-  if (rateLimited(clientIp(request))) {
+  if (rateLimited(clientIp(request), 10, 'schema-check')) {
     return Response.json({ error: 'Rate limit reached. Try again in an hour.' }, { status: 429 });
   }
 

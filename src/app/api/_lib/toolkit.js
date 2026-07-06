@@ -5,12 +5,15 @@
 const RATE_LIMIT = 10; // requests per IP per hour
 const rateBuckets = new Map();
 
-export function rateLimited(ip, limit = RATE_LIMIT) {
+/* Buckets are keyed per tool + IP so heavy use of one tool doesn't burn
+   another tool's quota. */
+export function rateLimited(ip, limit = RATE_LIMIT, scope = 'shared') {
   const now = Date.now();
-  const bucket = rateBuckets.get(ip)?.filter((t) => now - t < 60 * 60 * 1000) ?? [];
+  const key = `${scope}:${ip}`;
+  const bucket = rateBuckets.get(key)?.filter((t) => now - t < 60 * 60 * 1000) ?? [];
   if (bucket.length >= limit) return true;
   bucket.push(now);
-  rateBuckets.set(ip, bucket);
+  rateBuckets.set(key, bucket);
   return false;
 }
 
@@ -33,6 +36,16 @@ export function createCache(ttlMs = 24 * 60 * 60 * 1000) {
 
 const HOST_RE = /^(?!-)[a-z0-9-]{1,63}(?<!-)(\.(?!-)[a-z0-9-]{1,63}(?<!-))+$/i;
 
+/* SSRF guard: reject IP literals (public DNS names only) and internal-only
+   hostnames so the tools can't be pointed at cloud metadata or the LAN. */
+export function isPublicHost(hostname) {
+  const h = hostname.toLowerCase().replace(/\.$/, '');
+  if (!HOST_RE.test(h)) return false;                       // also rejects bare "localhost", IPv6
+  if (/^(\d{1,3}\.){3}\d{1,3}$/.test(h)) return false;      // IPv4 literal
+  if (/\.(localhost|local|internal|home|lan|corp|intranet)$/.test(h)) return false;
+  return true;
+}
+
 /* Accept a bare domain, a domain+path, or a full URL. Returns a normalized
    { url, host, origin } or null if the host isn't a valid public domain. */
 export function normalizeTarget(raw) {
@@ -45,27 +58,42 @@ export function normalizeTarget(raw) {
   } catch {
     return null;
   }
+  if (!isPublicHost(u.hostname)) return null;
   const host = u.hostname.replace(/^www\./, '');
-  if (!HOST_RE.test(host)) return null;
   return { url: u.href, host, origin: u.origin };
 }
 
 const UA = 'GobiyaSiteDiagnostics/1.0 (+https://www.gobiya.com/tools)';
 
+const MAX_REDIRECTS = 5;
+const MAX_BODY_BYTES = 3 * 1024 * 1024; // plenty for HTML/robots/sitemaps
+
+/* Follow redirects manually so every hop is re-checked against the SSRF
+   guard — a public site must not be able to bounce us to an internal IP. */
 export async function fetchText(url, timeoutMs = 10000) {
-  const res = await fetch(url, {
-    signal: AbortSignal.timeout(timeoutMs),
-    redirect: 'follow',
-    headers: { 'User-Agent': UA },
-  });
-  const text = res.ok ? await res.text() : '';
-  return {
-    ok: res.ok,
-    status: res.status,
-    finalUrl: res.url,
-    headers: res.headers,
-    text,
-  };
+  let current = url;
+  for (let hop = 0; hop <= MAX_REDIRECTS; hop++) {
+    const u = new URL(current);
+    if (!isPublicHost(u.hostname)) throw new Error('blocked host');
+    const res = await fetch(current, {
+      signal: AbortSignal.timeout(timeoutMs),
+      redirect: 'manual',
+      headers: { 'User-Agent': UA },
+    });
+    if (res.status >= 300 && res.status < 400) {
+      const loc = res.headers.get('location');
+      if (!loc) return { ok: false, status: res.status, finalUrl: current, headers: res.headers, text: '' };
+      current = new URL(loc, current).href;
+      continue;
+    }
+    let text = '';
+    if (res.ok) {
+      text = await res.text();
+      if (text.length > MAX_BODY_BYTES) text = text.slice(0, MAX_BODY_BYTES);
+    }
+    return { ok: res.ok, status: res.status, finalUrl: current, headers: res.headers, text };
+  }
+  throw new Error('too many redirects');
 }
 
 /* Strip a URL's path for robots.txt Disallow matching. */

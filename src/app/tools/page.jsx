@@ -61,7 +61,7 @@ const tools = [
     href: '/tools/llms-txt-generator',
     id: 'T-08',
     name: 'llms.txt Generator',
-    desc: 'Draft a compliant llms.txt for your site so AI crawlers know what you are.',
+    desc: 'Draft a compliant llms.txt in seconds so ChatGPT, Perplexity, and Google AI crawlers know what your site is, what it does, and which endpoints matter.',
     live: true,
   },
 ];

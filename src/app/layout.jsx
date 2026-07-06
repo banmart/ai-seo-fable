@@ -14,7 +14,7 @@ export const metadata = {
     siteName: 'GOBIYA',
     images: [
       {
-        url: '/assets/images/hero-core.png',
+        url: '/assets/images/hero-core.webp',
         width: 1376,
         height: 768,
       },
@@ -42,13 +42,13 @@ export default function RootLayout({ children }) {
         "@id": "https://www.gobiya.com/#org",
         "name": "GOBIYA",
         "url": "https://www.gobiya.com/",
-        "logo": "https://www.gobiya.com/assets/images/hero-core.png",
+        "logo": "https://www.gobiya.com/assets/images/hero-core.webp",
         "description": "Elite AI SEO and web development agency architecting programmatic search ecosystems and behavioral-psychology-driven conversion funnels.",
         "knowsAbout": ["Search Engine Optimization","Programmatic SEO","Entity-first Indexing","Conversion Rate Optimization","Neuromarketing","Core Web Vitals"],
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "sales",
-          "email": "deploy@gobiya.com"
+          "email": "hello@gobiya.com"
         }
       },
       {
@@ -71,7 +71,7 @@ export default function RootLayout({ children }) {
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=Michroma&family=Inter:wght@200;300;400;600&display=swap" rel="stylesheet" />
         <link rel="mcp" href="/.well-known/mcp.json" type="application/json" />
         <link rel="describedby" href="/llms.txt" type="text/plain" />
-        <meta name="mcp-server" content="https://api.gobiya.com/mcp/v1" />
+        <meta name="mcp-server" content="https://www.gobiya.com/mcp/v1" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <script dangerouslySetInnerHTML={{
           __html: `

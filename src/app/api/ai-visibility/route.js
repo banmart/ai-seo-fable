@@ -6,6 +6,8 @@
    - sitemap.xml: presence
    Results cached in-memory for 24h; rate-limited per IP. */
 
+import { isPublicHost, fetchText } from '../_lib/toolkit';
+
 export const runtime = 'nodejs';
 
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
@@ -34,15 +36,6 @@ function rateLimited(ip) {
   bucket.push(now);
   rateBuckets.set(ip, bucket);
   return false;
-}
-
-async function fetchText(url, timeoutMs = 8000) {
-  const res = await fetch(url, {
-    signal: AbortSignal.timeout(timeoutMs),
-    redirect: 'follow',
-    headers: { 'User-Agent': 'GobiyaAIVisibilityChecker/1.0 (+https://www.gobiya.com/tools/ai-visibility-checker)' },
-  });
-  return { ok: res.ok, status: res.status, text: res.ok ? await res.text() : '' };
 }
 
 /* Parse robots.txt into UA groups: [{ agents: [...], disallow: [...], allow: [...] }] */
@@ -232,7 +225,7 @@ export async function POST(request) {
   } catch {
     return Response.json({ error: 'Invalid request body.' }, { status: 400 });
   }
-  if (!DOMAIN_RE.test(domain)) {
+  if (!DOMAIN_RE.test(domain) || !isPublicHost(domain)) {
     return Response.json({ error: 'Enter a valid domain, e.g. example.com' }, { status: 400 });
   }
 

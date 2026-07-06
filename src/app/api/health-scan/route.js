@@ -145,7 +145,7 @@ function analyze(html, headers, robotsText, url) {
 }
 
 export async function POST(request) {
-  if (rateLimited(clientIp(request))) {
+  if (rateLimited(clientIp(request), 10, 'health-scan')) {
     return Response.json({ error: 'Rate limit reached. Try again in an hour.' }, { status: 429 });
   }
 

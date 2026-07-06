@@ -153,7 +153,7 @@ function buildVerdict({ robots, sitemap, home }) {
 }
 
 export async function POST(request) {
-  if (rateLimited(clientIp(request))) {
+  if (rateLimited(clientIp(request), 10, 'crawl-analyzer')) {
     return Response.json({ error: 'Rate limit reached. Try again in an hour.' }, { status: 429 });
   }
 

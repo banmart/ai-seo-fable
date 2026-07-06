@@ -13,18 +13,20 @@ export default function LlmTxtTool() {
 
   const generateLlmTxt = (e) => {
     e.preventDefault();
-    
-    let txt = `# ${siteName}\n`;
-    txt += `> ${description}\n\n`;
+
+    const url = siteUrl.trim().replace(/\/+$/, '');
+    let txt = `# ${siteName.trim()}\n`;
+    txt += `> ${description.trim()}\n\n`;
     txt += `## Primary Links\n`;
-    txt += `- [Home](${siteUrl})\n`;
-    
-    if (docsUrl) {
-      txt += `- [Documentation](${docsUrl})\n`;
+    txt += `- [Home](${url})\n`;
+    txt += `- [Sitemap](${url}/sitemap.xml)\n`;
+
+    if (docsUrl.trim()) {
+      txt += `- [Documentation](${docsUrl.trim()})\n`;
     }
-    
+
     txt += `\n## Contact\n`;
-    txt += `- [Contact Email](mailto:${contactEmail})\n`;
+    txt += `- [Contact Email](mailto:${contactEmail.trim()})\n`;
 
     setGeneratedTxt(txt);
     setCopied(false);

@@ -4,7 +4,7 @@ import './SteveMartin.css';
 
 export const metadata = {
   title: 'Steve Martin: SEO & Dev LA, founded Gobiya 2010, BBB A+ | Gobiya',
-  description: 'Steve Martin is the founder of Gobiya, an SEO and web development agency in Los Angeles established in 2010. 25+ years in web development and search, Google Partner 2015–2019, BBB A+ rated.',
+  description: 'Steve Martin is the founder of Gobiya, an SEO and web development agency in Los Angeles established in 2010. 30+ years in web design and search, Google Partner 2015–2019, BBB A+ rated.',
   alternates: { canonical: '/about/steve-martin' },
 };
 
@@ -21,8 +21,8 @@ export default function SteveMartinPage() {
         name: 'Gobiya',
         url: 'https://www.gobiya.com',
       },
-      image: 'https://www.gobiya.com/images/steve-portrait.webp',
-      description: 'Steve Martin is the CEO, Lead Developer, and Marketer at Gobiya, with 25+ years of experience helping contractors, dental practices, real estate, and SaaS startups grow through organic search, paid media, and custom React/Vite development.',
+      image: 'https://www.gobiya.com/assets/images/steve-portrait-thumb.webp',
+      description: 'Steve Martin is the CEO, Lead Developer, and Marketer at Gobiya, with 30+ years of experience helping contractors, dental practices, real estate, and SaaS startups grow through organic search, paid media, and custom React/Vite development.',
       url: 'https://www.gobiya.com/about/steve-martin',
       sameAs: ['https://www.linkedin.com/in/stevemartingobiya/'],
       knowsAbout: [

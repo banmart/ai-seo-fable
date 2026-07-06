@@ -188,7 +188,7 @@ export default function AgedDomainTool() {
       {status === 'COMPLETE' && results && (
         <div className="tool-result">
           <ul className="tool-issues" style={{ marginTop: '1.5rem' }}>
-            {Array.isArray(results.domains) ? results.domains.map((domain, i) => {
+            {results.domains?.length ? results.domains.map((domain, i) => {
               // Replace YOUR_AFFILIATE_ID with the actual ID later
               const affiliateLink = `https://www.namecheap.com/domains/registration/results/?domain=${domain.name}&affId=YOUR_AFFILIATE_ID`;
               

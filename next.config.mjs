@@ -3,6 +3,7 @@ const nextConfig = {
   async redirects() {
     return [
       { source: '/book', destination: '/#apex', permanent: true },
+      { source: '/contact', destination: '/#apex', permanent: true },
       { source: '/about', destination: '/about/steve-martin', permanent: true },
       { source: '/creativity', destination: '/', permanent: true },
       { source: '/insights', destination: '/', permanent: true },

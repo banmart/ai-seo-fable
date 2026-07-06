@@ -64,7 +64,7 @@ export default function LlmTxtGeneratorPage() {
           As AI search engines like Perplexity, SearchGPT, and Google AI Overviews replace traditional blue links, your visibility depends on how easily Large Language Models can parse and summarize your site.
         </p>
         <p>
-          While `robots.txt` tells bots what to ignore, `llms.txt` tells them what matters. Providing this file gives you direct control over how your entity is defined in the training data and live retrieval context of the world's most powerful AI models.
+          While <code>robots.txt</code> tells bots what to ignore, <code>llms.txt</code> tells them what matters. Providing this file gives you direct control over how your entity is defined in the training data and live retrieval context of the world's most powerful AI models.
         </p>
       </section>
 

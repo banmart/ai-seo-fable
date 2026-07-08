@@ -66,7 +66,7 @@ export function useScrollEngine() {
     async function decodeClip(i) {
       if (frames[i] !== null || decoding.has(i)) return;
       decoding.add(i);
-      let video;
+      let video, buf;
       try {
         video = document.createElement('video');
         video.muted = true;
@@ -84,7 +84,10 @@ export function useScrollEngine() {
           video.onloadeddata = () => { clearTimeout(t); res(); };
           video.onerror = (e) => { clearTimeout(t); rej(e); };
         });
-        const buf = [];
+        buf = [];
+        // Reveal progressively: frames[i] is live from the first captured frame onward,
+        // so the canvas can fade in immediately instead of waiting on all 60 frames.
+        frames[i] = buf;
         const dur = (video.duration && isFinite(video.duration)) ? video.duration : 10;
         for (let f = 0; f < FRAMES_PER_CLIP; f++) {
           video.currentTime = Math.max((f / (FRAMES_PER_CLIP - 1)) * Math.max(dur - 0.1, 0), 0.01);
@@ -107,13 +110,14 @@ export function useScrollEngine() {
             }
           });
           buf.push(await createImageBitmap(video));
+          canvas.classList.add('ready');
+          render();
         }
-        if (buf.length === 0) throw new Error('No frames decoded');
-        frames[i] = buf;
-        canvas.classList.add('ready');
-        render();
+        if (buf.length === 0) frames[i] = false; // no frames captured → procedural fallback
       } catch {
-        frames[i] = false; // clip missing → procedural fallback
+        // Keep whatever frames were already progressively revealed rather than discarding
+        // them — only fall back to the procedural renderer if nothing was captured at all.
+        if (!buf || buf.length === 0) frames[i] = false;
       } finally {
         decoding.delete(i);
         video?.remove();
@@ -241,9 +245,13 @@ export function useScrollEngine() {
         canvas.classList.add('ready');
       }
       // If clip === null (still loading), do nothing and let the poster image show.
-      
+
       decodeClip(act);
-      if (act + 1 < ZONES.length) decodeClip(act + 1);
+      // Defer preloading the next zone until the current one has shown something (a frame
+      // or the procedural fallback) — otherwise it competes with the active zone's decode
+      // for the seek/frame pipeline and delays the very first frame the visitor sees.
+      const revealed = clip === false || (clip && clip.length > 0);
+      if (revealed && act + 1 < ZONES.length) decodeClip(act + 1);
     }
 
     function loop() {

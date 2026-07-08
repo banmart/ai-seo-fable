@@ -44,11 +44,22 @@ export default function RootLayout({ children }) {
         "url": "https://www.gobiya.com/",
         "logo": "https://www.gobiya.com/assets/images/hero-core.webp",
         "description": "Elite AI SEO and web development agency architecting programmatic search ecosystems and behavioral-psychology-driven conversion funnels.",
+        "telephone": "+1-323-744-1338",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "3580 Wilshire Blvd, Ste 132",
+          "addressLocality": "Los Angeles",
+          "addressRegion": "CA",
+          "postalCode": "90010",
+          "addressCountry": "US"
+        },
         "knowsAbout": ["Search Engine Optimization","Programmatic SEO","Entity-first Indexing","Conversion Rate Optimization","Neuromarketing","Core Web Vitals"],
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "sales",
-          "email": "hello@gobiya.com"
+          "email": "hello@gobiya.com",
+          "telephone": "+1-323-744-1338",
+          "areaServed": "US"
         }
       },
       {
@@ -65,7 +76,6 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="preload" as="image" href="/assets/images/hero-core.webp" fetchPriority="high" />
-        <link rel="preload" as="video" href="/assets/videos/zone-1-chaos.webm" type="video/webm" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=Michroma&family=Inter:wght@200;300;400;600&display=swap" rel="stylesheet" />

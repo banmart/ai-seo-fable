@@ -102,6 +102,8 @@ export default function DesignIdeasTool() {
           <p className="lede" style={{ marginBottom: '3rem' }}>
             Enter your domain or a few keywords and our AI reads your business, derives three design
             directions, and renders live homepage mockups — generated for you, not from a template.
+            Unlike our other free tools, this one renders real AI images per request, so we ask for
+            an email to keep the generator from being abused — we'll never spam you.
           </p>
 
           <form className="deploy-form" onSubmit={handleSubmit} style={{ textAlign: 'left' }}>
@@ -124,6 +126,9 @@ export default function DesignIdeasTool() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
+            <p className="mono" style={{ fontSize: '0.7rem', color: 'var(--text-dim)', marginTop: '-0.5rem' }}>
+              Used to send your results and prevent generator abuse — not for marketing.
+            </p>
 
             <button type="submit" className="cta" style={{ width: '100%', marginTop: '1rem' }}>
               Generate Concepts →

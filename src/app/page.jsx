@@ -20,7 +20,7 @@ export default function HomePage() {
         "name": "GOBIYA — AI SEO & Programmatic Search Architecture",
         "isPartOf": { "@id": "https://www.gobiya.com/#website" },
         "about": { "@id": "https://www.gobiya.com/#org" },
-        "primaryImageOfPage": "https://www.gobiya.com/assets/images/hero-core.png"
+        "primaryImageOfPage": "https://www.gobiya.com/assets/images/hero-core.webp"
       },
       {
         "@type": "Service",

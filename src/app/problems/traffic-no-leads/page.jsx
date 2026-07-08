@@ -1,4 +1,5 @@
 import SubpageLayout from '../../../components/SubpageLayout';
+import MidFunnelCTA from '../../../components/MidFunnelCTA';
 
 export const metadata = {
   title: 'High Traffic, No Leads? Fix the Intent Mismatch | GOBIYA',
@@ -77,6 +78,39 @@ export default function TrafficNoLeadsPage() {
         </ul>
       </section>
 
+      <section aria-labelledby="h-selfcheck">
+        <h2 id="h-selfcheck">Check this yourself in 5 minutes</h2>
+        <ul className="spec-list">
+          <li>
+            <span className="mono spec-id">01</span>
+            <h3>Pull your top 20 queries by clicks</h3>
+            <p>
+              Search Console → Performance → Queries, sorted by clicks. For each, ask: would
+              someone typing this be ready to talk to sales, or just researching? A page full of
+              research-stage queries won't convert like a commercial one.
+            </p>
+          </li>
+          <li>
+            <span className="mono spec-id">02</span>
+            <h3>Read the SERP for your top 3 revenue queries</h3>
+            <p>
+              Search each in an incognito window. If the results are mostly listicles and guides
+              but your page is a demo-request form, Google — and searchers — expect a different
+              page type than the one you're offering there.
+            </p>
+          </li>
+          <li>
+            <span className="mono spec-id">03</span>
+            <h3>Trace one session from landing to drop-off</h3>
+            <p>
+              In GA4, open the funnel exploration for your primary conversion event and find the
+              step with the steepest drop between a high-traffic landing page and the next
+              action. That's usually where architecture, not traffic volume, is the bottleneck.
+            </p>
+          </li>
+        </ul>
+      </section>
+
       <section aria-labelledby="h-fix">
         <h2 id="h-fix">The resolution</h2>
         <p>
@@ -103,6 +137,7 @@ export default function TrafficNoLeadsPage() {
       </section>
 
       <div className="cta-group" style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}><a className="cta" href="/#apex">Request Deployment Brief →</a><a className="cta cta--ghost mono" href="tel:3237441338">📞 (323) 744-1338</a></div>
+      <div style={{ marginTop: '1.25rem' }}><MidFunnelCTA page="/problems/traffic-no-leads" /></div>
     </SubpageLayout>
   );
 }

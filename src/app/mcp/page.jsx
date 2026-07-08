@@ -50,17 +50,17 @@ function ToolCard({ tool }) {
   const hasParams = Object.keys(props).length > 0
 
   return (
-    <article className="mcp-tool-card" itemScope itemType="https://schema.org/SoftwareApplication">
+    <article className="mcp-tool-card">
       <button
         className="mcp-tool-header"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
       >
         <div className="mcp-tool-title">
-          <span className="mcp-tool-name mono" itemProp="name">{tool.name}</span>
+          <span className="mcp-tool-name mono">{tool.name}</span>
           <span className="mcp-tool-arrow">{open ? '▲' : '▼'}</span>
         </div>
-        <p className="mcp-tool-desc" itemProp="description">{tool.description}</p>
+        <p className="mcp-tool-desc">{tool.description}</p>
       </button>
 
       {open && (
@@ -116,16 +116,28 @@ export default function MCPPage() {
   const claudeConfig = JSON.stringify({
     mcpServers: {
       gobiya: {
-        command: 'npx',
-        args: ['-y', '@modelcontextprotocol/server-http-client'],
-        env: { MCP_SERVER_URL: 'https://www.gobiya.com/mcp/v1' },
+        type: 'http',
+        url: 'https://www.gobiya.com/mcp/v1',
       },
     },
   }, null, 2)
 
+  const webPageJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': 'https://www.gobiya.com/mcp/#page',
+    url: 'https://www.gobiya.com/mcp',
+    name: 'Gobiya MCP Server',
+    description:
+      'A Model Context Protocol server that lets AI agents discover services, retrieve case studies, estimate costs, and submit qualified leads directly to Gobiya.',
+    isPartOf: { '@id': 'https://www.gobiya.com/#website' },
+    about: { '@id': 'https://www.gobiya.com/#org' },
+  }
+
   return (
     <SubpageLayout>
-      <div className="mcp-page" itemScope itemType="https://schema.org/WebPage" style={{ background: 'transparent' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }} />
+      <div className="mcp-page" style={{ background: 'transparent' }}>
         <main className="mcp-main" style={{ paddingTop: '2rem' }}>
 
         {/* ── Hero ── */}
@@ -133,10 +145,10 @@ export default function MCPPage() {
           <div className="mcp-hero-grid">
             <div>
               <p className="kicker mono">// MCP SERVER — GOBIYA v{MCP_SERVER.version}</p>
-              <h1 id="mcp-h1" itemProp="name">
+              <h1 id="mcp-h1">
                 Gobiya MCP Server
               </h1>
-              <p className="mcp-hero-sub" itemProp="description">
+              <p className="mcp-hero-sub">
                 A Model Context Protocol server that lets AI agents — Claude, ChatGPT, Perplexity,
                 and any MCP-compatible client — discover services, retrieve case studies,
                 estimate costs, and submit qualified leads directly to Gobiya.
@@ -232,9 +244,9 @@ export default function MCPPage() {
         </section>
 
         {/* ── About ── */}
-        <section className="mcp-section mcp-about" aria-labelledby="mcp-about-h2" itemScope itemType="https://schema.org/Organization">
+        <section className="mcp-section mcp-about" aria-labelledby="mcp-about-h2">
           <h2 id="mcp-about-h2" className="mcp-section-title mono">// ABOUT GOBIYA</h2>
-          <p itemProp="description">
+          <p>
             Gobiya is a Los Angeles digital marketing agency specializing in SEO, GEO (AI citation optimization),
             Google Ads, custom web development, and Google penalty recovery for local service businesses and B2B firms.
             Founded by Steve Martin in 2010 — 25 years in search engineering.

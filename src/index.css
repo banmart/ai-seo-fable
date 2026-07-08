@@ -158,11 +158,21 @@ body { --grade: var(--navy); }
 }
 .hud__nav a {
   display: block;
+  position: relative;
   width: 7px; height: 7px;
   border: 1px solid var(--text-dim);
   transform: rotate(45deg);
   transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
   cursor: pointer;
+}
+.hud__nav a::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
 }
 .hud__nav a.active {
   background: var(--cyan);
@@ -448,6 +458,9 @@ h3 {
   font-size: 0.72rem;
   letter-spacing: 0.25em;
   padding: 0.55rem 1.3rem;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
   cursor: pointer;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }

@@ -26,6 +26,8 @@ export default function sitemap() {
     { path: '/outcomes/semantic-search-domination', priority: 0.8 },
     { path: '/about/steve-martin', priority: 0.8 },
     { path: '/mcp', priority: 0.6 },
+    { path: '/privacy', priority: 0.3 },
+    { path: '/terms', priority: 0.3 },
   ];
   return routes.map(({ path, priority }) => ({
     url: `${BASE}${path}`,

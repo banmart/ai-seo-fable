@@ -1,4 +1,5 @@
 import SubpageLayout from '../../../components/SubpageLayout';
+import MidFunnelCTA from '../../../components/MidFunnelCTA';
 
 export const metadata = {
   title: 'Pages Not Indexed? Fix Crawl Budget & Index Bloat | GOBIYA',
@@ -77,6 +78,39 @@ export default function PagesNotIndexedPage() {
         </ul>
       </section>
 
+      <section aria-labelledby="h-selfcheck">
+        <h2 id="h-selfcheck">Check this yourself in 5 minutes</h2>
+        <ul className="spec-list">
+          <li>
+            <span className="mono spec-id">01</span>
+            <h3>Pull your index-state ratio</h3>
+            <p>
+              Search Console → Pages → "Why pages aren't indexed." Divide indexed pages by
+              (indexed + "Discovered — currently not indexed" + "Crawled — currently not
+              indexed"). Below roughly 50% is a real problem, not noise.
+            </p>
+          </li>
+          <li>
+            <span className="mono spec-id">02</span>
+            <h3>Spot-check one excluded template</h3>
+            <p>
+              Open five URLs from your largest "Discovered — currently not indexed" group side by
+              side. If the only difference between them is a swapped city, product, or spec
+              value, that template is the section Google has written off.
+            </p>
+          </li>
+          <li>
+            <span className="mono spec-id">03</span>
+            <h3>Check where crawl budget actually goes</h3>
+            <p>
+              Search Console → Settings → Crawl stats → "By response" and "By file type." A large
+              share spent on parameterized or faceted URLs means Googlebot is burning budget on
+              pages you don't even want indexed.
+            </p>
+          </li>
+        </ul>
+      </section>
+
       <section aria-labelledby="h-fix">
         <h2 id="h-fix">The resolution</h2>
         <p>
@@ -104,6 +138,7 @@ export default function PagesNotIndexedPage() {
       </section>
 
       <div className="cta-group" style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}><a className="cta" href="/#apex">Request Deployment Brief →</a><a className="cta cta--ghost mono" href="tel:3237441338">📞 (323) 744-1338</a></div>
+      <div style={{ marginTop: '1.25rem' }}><MidFunnelCTA page="/problems/pages-not-indexed" /></div>
     </SubpageLayout>
   );
 }

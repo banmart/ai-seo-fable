@@ -209,7 +209,7 @@ export function useScrollEngine() {
 
     // ---------- Master render ----------
     function render() {
-      if (reduceMotion || !vw) return;
+      if (reduceMotion || osReducedMotion || !vw) return;
       const t = performance.now();
       const clip = frames[act];
       if (clip && clip.length) {
@@ -283,6 +283,7 @@ export function useScrollEngine() {
 
       document.querySelectorAll('.stat').forEach((el) => {
         const target = +el.dataset.count;
+        el.innerText = '0';
         ScrollTrigger.create({
           trigger: el,
           start: 'top 80%',

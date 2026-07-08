@@ -1,4 +1,5 @@
 import SubpageLayout from '../../../components/SubpageLayout';
+import MidFunnelCTA from '../../../components/MidFunnelCTA';
 
 export const metadata = {
   title: 'Semantic Search Domination — Own the Topic, Not the Keyword | GOBIYA',
@@ -6,6 +7,17 @@ export const metadata = {
     'The outcome: your site is the entity search systems resolve to for an entire topic cluster. Hub-and-spoke architecture, intent-mapped coverage, and rankings that scale.',
   alternates: { canonical: '/outcomes/semantic-search-domination' },
 };
+
+const faqs = [
+  {
+    q: "Isn't targeting more keywords always better?",
+    a: "Not if it dilutes topical focus. A handful of comprehensive, well-linked pages that thoroughly cover related intents typically outperform dozens of thin pages each targeting one keyword, because Google's systems reward depth and internal-linking coherence over sheer page count.",
+  },
+  {
+    q: 'How many pages does a topic cluster actually need?',
+    a: 'It depends on how many genuinely distinct search intents exist within the topic — determined by looking at actual SERP overlap, not guessing. A cluster with 8 truly distinct spokes outperforms one with 30 near-duplicate spokes competing with each other.',
+  },
+];
 
 export default function SemanticSearchPage() {
   const jsonLd = {
@@ -17,10 +29,20 @@ export default function SemanticSearchPage() {
     "description": "The outcome: your site is the entity search systems resolve to for an entire topic cluster. Hub-and-spoke architecture, intent-mapped coverage, and rankings that scale.",
     "isPartOf": { "@id": "https://www.gobiya.com/#website" }
   };
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  };
 
   return (
     <SubpageLayout>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <p className="kicker mono">// OUTCOME 04 — TOPICAL STATE: SATURATED</p>
       <h1>Own the Topic.<br />Keywords Follow.</h1>
       <p className="lede">
@@ -28,6 +50,17 @@ export default function SemanticSearchPage() {
         the authority for an entire topic cluster, so you rank across hundreds of intent
         variations you never individually targeted.
       </p>
+
+      <section aria-labelledby="h-plain">
+        <h2 id="h-plain">In plain terms</h2>
+        <p>
+          Google increasingly ranks around topics and entities, not isolated keywords — a site
+          that comprehensively covers a subject, organized so each page answers one intent
+          clearly and links to related coverage, tends to outrank one page trying to rank for
+          many keywords at once. "Owning a topic" means Google's systems recognize the site as
+          the most complete, well-organized resource for that subject.
+        </p>
+      </section>
 
       <section aria-labelledby="h-mechanism">
         <h2 id="h-mechanism">How it's built</h2>
@@ -91,7 +124,20 @@ export default function SemanticSearchPage() {
         </a>
       </section>
 
+      <section aria-labelledby="h-faq">
+        <h2 id="h-faq">FAQ</h2>
+        <ul className="faq">
+          {faqs.map(({ q, a }) => (
+            <li key={q}>
+              <h3>{q}</h3>
+              <p>{a}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <div className="cta-group" style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}><a className="cta" href="/#apex">Request Deployment Brief →</a><a className="cta cta--ghost mono" href="tel:3237441338">📞 (323) 744-1338</a></div>
+      <div style={{ marginTop: '1.25rem' }}><MidFunnelCTA page="/outcomes/semantic-search-domination" /></div>
     </SubpageLayout>
   );
 }

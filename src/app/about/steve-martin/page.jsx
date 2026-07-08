@@ -7,7 +7,32 @@ export const metadata = {
   alternates: { canonical: '/about/steve-martin' },
 };
 
+const faqs = [
+  {
+    q: 'Who is Steve Martin at Gobiya?',
+    a: 'Steve Martin is the founder of Gobiya and its lead developer and marketer. Unlike agency principals who delegate all technical work, Steve writes the code, implements the schema, configures the analytics, and runs the actual SEO programs he designs. He has 25+ years of search engineering experience across multiple industries, holds a Google certification in Google Ads and Analytics, and operates Gobiya as a BBB A+ rated business.',
+  },
+  {
+    q: 'What industries has Steve Martin worked in?',
+    a: 'Steve Martin has worked across SaaS startups, contractors and home services, dental and medical practices, real estate agencies, e-commerce businesses, and professional service firms. His current primary focus is B2B companies seeking to connect organic search programs to CRM pipeline and closed-won revenue rather than just traffic volume.',
+  },
+  {
+    q: "What is Steve Martin's current SEO specialization?",
+    a: 'Steve Martin currently specializes in entity-based SEO for Google\'s Knowledge Graph, Generative Engine Optimization (GEO) for AI tools like ChatGPT and Perplexity, schema markup and structured data implementation, React and Vite web development for technical SEO, and AI-powered lead generation and CRM pipeline automation.',
+  },
+];
+
 export default function SteveMartinPage() {
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  };
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
@@ -45,12 +70,20 @@ export default function SteveMartinPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+
       <div className="steve-header-area">
         <div className="steve-header-text">
           <p className="kicker mono">// GOBIYA / LEADERSHIP & ENGINEERING</p>
           <h1>Steve Martin</h1>
           <p className="lede">Founder, Lead Developer & Marketer at Gobiya</p>
+          <div className="cta-group steve-top-cta" style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap', marginTop: '1.25rem' }}>
+            <a className="cta" href="/#apex" title="Request deployment brief">Work with Steve →</a>
+            <a className="cta cta--ghost mono" href="tel:3237441338" title="Call Steve directly">📞 (323) 744-1338</a>
+          </div>
         </div>
         <img src="/assets/images/steve-portrait-thumb.webp" alt="Steve Martin" className="steve-profile-img" />
       </div>
@@ -77,7 +110,7 @@ export default function SteveMartinPage() {
           <div className="steve-card">
             <span className="mono spec-id">01</span>
             <h3>25+ Years in Search Engineering</h3>
-            <p>Direct hands-on search engineering since 1999 across contractors, healthcare, SaaS, and e-commerce verticals. Google-certified in YouTube Advertising and Analytics (2015–2019).</p>
+            <p>Direct hands-on search engineering since 1999 across contractors, healthcare, SaaS, and e-commerce verticals. Google-certified in Google Ads and Analytics (2015–2019).</p>
           </div>
           <div className="steve-card">
             <span className="mono spec-id">02</span>
@@ -105,18 +138,12 @@ export default function SteveMartinPage() {
       <section className="steve-section">
         <h2 className="steve-h2">Common Questions</h2>
         <ul className="faq">
-          <li>
-            <h3>Who is Steve Martin at Gobiya?</h3>
-            <p>Steve Martin is the founder of Gobiya and its lead developer and marketer. Unlike agency principals who delegate all technical work, Steve writes the code, implements the schema, configures the analytics, and runs the actual SEO programs he designs. He has 25+ years of search engineering experience across multiple industries, holds Google certifications in YouTube Advertising and Analytics, and operates Gobiya as a BBB A+ rated business.</p>
-          </li>
-          <li>
-            <h3>What industries has Steve Martin worked in?</h3>
-            <p>Steve Martin has worked across SaaS startups, contractors and home services, dental and medical practices, real estate agencies, e-commerce businesses, and professional service firms. His current primary focus is B2B companies seeking to connect organic search programs to CRM pipeline and closed-won revenue rather than just traffic volume.</p>
-          </li>
-          <li>
-            <h3>What is Steve Martin's current SEO specialization?</h3>
-            <p>Steve Martin currently specializes in entity-based SEO for Google's Knowledge Graph, Generative Engine Optimization (GEO) for AI tools like ChatGPT and Perplexity, schema markup and structured data implementation, React and Vite web development for technical SEO, and AI-powered lead generation and CRM pipeline automation.</p>
-          </li>
+          {faqs.map(({ q, a }) => (
+            <li key={q}>
+              <h3>{q}</h3>
+              <p>{a}</p>
+            </li>
+          ))}
         </ul>
       </section>
 

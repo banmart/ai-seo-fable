@@ -1,4 +1,5 @@
 import SubpageLayout from '../../../components/SubpageLayout';
+import MidFunnelCTA from '../../../components/MidFunnelCTA';
 
 export const metadata = {
   title: 'AI Overviews Eating Your Clicks? Rankings Flat, Traffic Down | GOBIYA',
@@ -77,6 +78,39 @@ export default function LosingClicksToAiPage() {
         </ul>
       </section>
 
+      <section aria-labelledby="h-selfcheck">
+        <h2 id="h-selfcheck">Check this yourself in 5 minutes</h2>
+        <ul className="spec-list">
+          <li>
+            <span className="mono spec-id">01</span>
+            <h3>Compare impressions to clicks over time</h3>
+            <p>
+              Search Console → Performance, date range 16 months, compare to previous period.
+              Filter to your top queries. Flat or rising impressions with falling clicks and CTR
+              is the signature of an answer surface satisfying the query above you.
+            </p>
+          </li>
+          <li>
+            <span className="mono spec-id">02</span>
+            <h3>Check which of your queries trigger an AI Overview</h3>
+            <p>
+              Search your top 10 queries by impressions in an incognito window and note which
+              show an AI Overview. Cross-reference against the CTR drop from step one — the
+              overlap confirms the cause rather than assuming it.
+            </p>
+          </li>
+          <li>
+            <span className="mono spec-id">03</span>
+            <h3>See who the AI answer is citing instead</h3>
+            <p>
+              For a query where you rank #1 but an AI Overview appears above it, expand the
+              Overview's sources. If a competitor is cited and you aren't, that's the specific
+              gap — not a general "AI is taking traffic" problem.
+            </p>
+          </li>
+        </ul>
+      </section>
+
       <section aria-labelledby="h-fix">
         <h2 id="h-fix">The resolution</h2>
         <p>
@@ -104,6 +138,7 @@ export default function LosingClicksToAiPage() {
       </section>
 
       <div className="cta-group" style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}><a className="cta" href="/#apex">Request Deployment Brief →</a><a className="cta cta--ghost mono" href="tel:3237441338">📞 (323) 744-1338</a></div>
+      <div style={{ marginTop: '1.25rem' }}><MidFunnelCTA page="/problems/losing-clicks-to-ai" /></div>
     </SubpageLayout>
   );
 }

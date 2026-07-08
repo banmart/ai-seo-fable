@@ -86,22 +86,22 @@ function ZoneScale() {
         <dl className="stat-grid">
           <div>
             <dt className="mono">ORGANIC TRAFFIC</dt>
-            <dd><span className="stat" data-count="412">0</span>%</dd>
+            <dd><span className="stat" data-count="412">412</span>%</dd>
             <dd className="stat-note">median 12-month growth, B2B SaaS cohort</dd>
           </div>
           <div>
             <dt className="mono">CONVERSION LIFT</dt>
-            <dd><span className="stat" data-count="188">0</span>%</dd>
+            <dd><span className="stat" data-count="188">188</span>%</dd>
             <dd className="stat-note">post behavioral-architecture rebuild</dd>
           </div>
           <div>
             <dt className="mono">ALGORITHMIC STABILITY</dt>
-            <dd><span className="stat" data-count="97">0</span>.4</dd>
+            <dd><span className="stat" data-count="97">97</span>.4</dd>
             <dd className="stat-note">core-update resilience index / 100</dd>
           </div>
           <div>
             <dt className="mono">INDEXED PAGES</dt>
-            <dd><span className="stat" data-count="240">0</span>K</dd>
+            <dd><span className="stat" data-count="240">240</span>K</dd>
             <dd className="stat-note">programmatic pages deployed &amp; ranking</dd>
           </div>
         </dl>

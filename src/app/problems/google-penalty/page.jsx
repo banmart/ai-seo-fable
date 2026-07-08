@@ -1,4 +1,5 @@
 import SubpageLayout from '../../../components/SubpageLayout';
+import MidFunnelCTA from '../../../components/MidFunnelCTA';
 
 export const metadata = {
   title: 'Traffic Crashed? Google Penalty & Core Update Recovery | GOBIYA',
@@ -81,6 +82,40 @@ export default function GooglePenaltyPage() {
         </a>
       </section>
 
+      <section aria-labelledby="h-selfcheck">
+        <h2 id="h-selfcheck">Check this yourself in 5 minutes</h2>
+        <ul className="spec-list">
+          <li>
+            <span className="mono spec-id">01</span>
+            <h3>Rule out a manual action first</h3>
+            <p>
+              Search Console → Security & Manual Actions. Empty means algorithmic, not manual —
+              stop looking for a "violation" to fix and start looking at the update calendar
+              instead.
+            </p>
+          </li>
+          <li>
+            <span className="mono spec-id">02</span>
+            <h3>Line up your drop date against Google's update calendar</h3>
+            <p>
+              Compare the date traffic broke in Search Console's Performance report against
+              Google's published core/spam update windows. A drop that starts mid-update is an
+              algorithmic reappraisal; a drop with no update nearby points elsewhere (technical
+              issue, seasonal, or a manual action pending notification).
+            </p>
+          </li>
+          <li>
+            <span className="mono spec-id">03</span>
+            <h3>Check the domain's history if it's not original</h3>
+            <p>
+              On an acquired or aged domain, pull its Wayback Machine archive and search Search
+              Console's manual-action history for the property. Prior spam usage or an old
+              penalty can suppress a domain long after you took it over.
+            </p>
+          </li>
+        </ul>
+      </section>
+
       <section aria-labelledby="h-fix">
         <h2 id="h-fix">The resolution</h2>
         <p>
@@ -108,6 +143,7 @@ export default function GooglePenaltyPage() {
       </section>
 
       <div className="cta-group" style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}><a className="cta" href="/#apex">Request Deployment Brief →</a><a className="cta cta--ghost mono" href="tel:3237441338">📞 (323) 744-1338</a></div>
+      <div style={{ marginTop: '1.25rem' }}><MidFunnelCTA page="/problems/google-penalty" /></div>
     </SubpageLayout>
   );
 }

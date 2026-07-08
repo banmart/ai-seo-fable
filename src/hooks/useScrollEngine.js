@@ -66,15 +66,22 @@ export function useScrollEngine() {
     async function decodeClip(i) {
       if (frames[i] !== null || decoding.has(i)) return;
       decoding.add(i);
+      let video;
       try {
-        const video = document.createElement('video');
+        video = document.createElement('video');
         video.muted = true;
         video.playsInline = true;
         video.preload = 'auto';
+        // Detached (unattached) video elements are throttled/inconsistent for frame decoding
+        // and requestVideoFrameCallback in some browsers — keep it in the DOM but invisible.
+        video.style.cssText = 'position:fixed; left:-9999px; top:-9999px; width:1px; height:1px; opacity:0; pointer-events:none;';
+        document.body.appendChild(video);
         video.src = VIDEO_SOURCES[i];
         await new Promise((res, rej) => {
           const t = setTimeout(() => rej(new Error('metadata timeout')), 5000);
-          video.onloadedmetadata = () => { clearTimeout(t); res(); };
+          // loadeddata (not just loadedmetadata) guarantees a frame has actually been decoded,
+          // otherwise the first seek below can grab a black bitmap before decoding has started.
+          video.onloadeddata = () => { clearTimeout(t); res(); };
           video.onerror = (e) => { clearTimeout(t); rej(e); };
         });
         const buf = [];
@@ -87,6 +94,18 @@ export function useScrollEngine() {
             video.onerror = () => { clearTimeout(t); res(false); };
           });
           if (!seeked) break; // If seek hangs or errors, stop decoding this clip and use what we have
+          // The seeked event can fire before the frame is actually painted, which grabs a black
+          // bitmap. Wait for the next real video frame (or two rAFs as a fallback) before capturing.
+          // Guarded with a timeout since requestVideoFrameCallback can fail to fire for a paused,
+          // seeked video in some browsers, which would otherwise hang decoding forever.
+          await new Promise((res) => {
+            const t = setTimeout(res, 500);
+            if (video.requestVideoFrameCallback) {
+              video.requestVideoFrameCallback(() => { clearTimeout(t); res(); });
+            } else {
+              requestAnimationFrame(() => requestAnimationFrame(() => { clearTimeout(t); res(); }));
+            }
+          });
           buf.push(await createImageBitmap(video));
         }
         if (buf.length === 0) throw new Error('No frames decoded');
@@ -97,6 +116,7 @@ export function useScrollEngine() {
         frames[i] = false; // clip missing → procedural fallback
       } finally {
         decoding.delete(i);
+        video?.remove();
       }
     }
 
